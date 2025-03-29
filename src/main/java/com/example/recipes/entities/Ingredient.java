@@ -17,7 +17,7 @@ public class Ingredient {
     private String ingredientName;
 
     @Column(name = "kcal_in_100g")
-    private double caloriesIn100g;
+    private double kcalIn100g;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
@@ -42,12 +42,12 @@ public class Ingredient {
         this.ingredientName = ingredientName;
     }
 
-    public double getCaloriesIn100g() {
-        return caloriesIn100g;
+    public double getKcalIn100g() {
+        return kcalIn100g;
     }
 
-    public void setCaloriesIn100g(double caloriesIn100g) {
-        this.caloriesIn100g = caloriesIn100g;
+    public void setKcalIn100g(double caloriesIn100g) {
+        this.kcalIn100g = caloriesIn100g;
     }
 
     public IngredientCategory getCategory() {
@@ -63,7 +63,7 @@ public class Ingredient {
         return "Ingredient{" +
                 "id=" + id +
                 ", ingredientName='" + ingredientName + '\'' +
-                ", caloriesIn100g=" + caloriesIn100g +
+                ", caloriesIn100g=" + kcalIn100g +
                 ", category=" + category +
                 '}';
     }
@@ -73,11 +73,11 @@ public class Ingredient {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ingredient that = (Ingredient) o;
-        return id == that.id && Double.compare(that.caloriesIn100g, caloriesIn100g) == 0 && Objects.equals(ingredientName, that.ingredientName) && Objects.equals(category, that.category);
+        return id == that.id && Double.compare(that.kcalIn100g, kcalIn100g) == 0 && Objects.equals(ingredientName, that.ingredientName) && Objects.equals(category, that.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, ingredientName, caloriesIn100g, category);
+        return Objects.hash(id, ingredientName, kcalIn100g, category);
     }
 }

@@ -1,0 +1,64 @@
+/* Ogólny styl strony */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* Tytuł strony */
+h1 {
+    text-align: center;
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Stylowanie tabeli */
+table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Nagłówki tabeli */
+th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Komórki tabeli */
+td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Styl dla pustej listy składników */
+div p {
+    text-align: center;
+    font-size: 1.2em;
+    color: #555;
+}
+
+/* Styl dla wierszy tabeli przy najechaniu */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsywność: zmniejszenie tabeli na urządzeniach mobilnych */
+@media (max-width: 768px) {
+    table {
+        width: 100%;
+    }
+
+    th, td {
+        padding: 8px;
+    }
+}
