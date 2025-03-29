@@ -46,6 +46,54 @@ public class Recipe {
     //private List<String> opinions;
 
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
+
+    public String getRecipeDescription() {
+        return recipeDescription;
+    }
+
+    public void setRecipeDescription(String recipeDescription) {
+        this.recipeDescription = recipeDescription;
+    }
+
+    public List<Ingredient> getIngredientsList() {
+        return ingredientsList;
+    }
+
+    public void setIngredientsList(List<Ingredient> ingredientsList) {
+        this.ingredientsList = ingredientsList;
+    }
+
+    public String getRecipeCategory() {
+        return recipeCategory;
+    }
+
+    public void setRecipeCategory(String recipeCategory) {
+        this.recipeCategory = recipeCategory;
+    }
+
+    public int getAmountOfPortions() {
+        return amountOfPortions;
+    }
+
+    public void setAmountOfPortions(int amountOfPortions) {
+        this.amountOfPortions = amountOfPortions;
+    }
+
     @Override
     public String toString() {
         return "Recipe{" +
