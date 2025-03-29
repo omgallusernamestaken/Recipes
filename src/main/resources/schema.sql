@@ -1,5 +1,5 @@
---DROP TABLE IF EXISTS ingredient_categories;
---DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS ingredient_categories;
 
 CREATE TABLE ingredient_categories (
     category_id SERIAL PRIMARY KEY,
