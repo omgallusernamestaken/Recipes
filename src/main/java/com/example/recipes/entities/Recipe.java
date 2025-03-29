@@ -21,14 +21,9 @@ public class Recipe {
     @Column(name = "recipe_description")
     private String recipeDescription;
 
-    @ManyToMany
-    @JoinTable(
-            name = "recipe_ingredients",
-            joinColumns = @JoinColumn(name = "recipe_id"),
-            inverseJoinColumns = @JoinColumn(name = "ingredient_id")
-    )
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private List<Ingredient> ingredientsList;
+    private List<RecipeIngredient> recipeIngredients;
 
     @Column(name = "recipe_category")
     private String recipeCategory;
@@ -70,12 +65,12 @@ public class Recipe {
         this.recipeDescription = recipeDescription;
     }
 
-    public List<Ingredient> getIngredientsList() {
-        return ingredientsList;
+    public List<RecipeIngredient> getRecipeIngredients() {
+        return recipeIngredients;
     }
 
-    public void setIngredientsList(List<Ingredient> ingredientsList) {
-        this.ingredientsList = ingredientsList;
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+        this.recipeIngredients = recipeIngredients;
     }
 
     public String getRecipeCategory() {
@@ -95,27 +90,15 @@ public class Recipe {
     }
 
     @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", recipeName='" + recipeName + '\'' +
-                ", recipeDescription='" + recipeDescription + '\'' +
-                ", ingredientsList=" + ingredientsList +
-                ", recipeCategory='" + recipeCategory + '\'' +
-                ", amountOfPortions=" + amountOfPortions +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return id == recipe.id && amountOfPortions == recipe.amountOfPortions && Objects.equals(recipeName, recipe.recipeName) && Objects.equals(recipeDescription, recipe.recipeDescription) && Objects.equals(ingredientsList, recipe.ingredientsList) && Objects.equals(recipeCategory, recipe.recipeCategory);
+        return id == recipe.id && amountOfPortions == recipe.amountOfPortions && Objects.equals(recipeName, recipe.recipeName) && Objects.equals(recipeDescription, recipe.recipeDescription) && Objects.equals(recipeIngredients, recipe.recipeIngredients) && Objects.equals(recipeCategory, recipe.recipeCategory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, recipeName, recipeDescription, ingredientsList, recipeCategory, amountOfPortions);
+        return Objects.hash(id, recipeName, recipeDescription, recipeIngredients, recipeCategory, amountOfPortions);
     }
 }

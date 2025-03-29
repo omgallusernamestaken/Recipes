@@ -1,5 +1,6 @@
 package com.example.recipes.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,6 +10,7 @@ public class RecipeIngredient {
     @Id
     @ManyToOne
     @JoinColumn(name = "recipe_id")
+    @JsonIgnore
     private Recipe recipe;
 
     @Id
@@ -50,15 +52,6 @@ public class RecipeIngredient {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "RecipeIngredient{" +
-                "recipe=" + recipe +
-                ", ingredient=" + ingredient +
-                ", quantity=" + quantity +
-                '}';
     }
 }
 

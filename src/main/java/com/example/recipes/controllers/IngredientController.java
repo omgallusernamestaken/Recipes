@@ -1,7 +1,7 @@
 package com.example.recipes.controllers;
 
 import com.example.recipes.entities.Ingredient;
-import com.example.recipes.repositories.IngredientRepository;
+import com.example.recipes.services.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,11 +15,11 @@ import java.util.List;
 public class IngredientController {
 
     @Autowired
-    IngredientRepository ingredientRepository;
+    private IngredientService ingredientService;
 
     @GetMapping("/all")
     public String getAllIngredients(Model model) {
-        List<Ingredient> listOfIngredients = ingredientRepository.findAll();
+        List<Ingredient> listOfIngredients = ingredientService.getAllIngredients();
         System.out.println(listOfIngredients);
         model.addAttribute("ingredients", listOfIngredients);
         return "ingredients_list";

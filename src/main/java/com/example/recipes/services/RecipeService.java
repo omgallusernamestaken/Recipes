@@ -1,6 +1,8 @@
 package com.example.recipes.services;
 
+import com.example.recipes.entities.Ingredient;
 import com.example.recipes.entities.Recipe;
+import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.repositories.RecipesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,10 +26,11 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
-    public List<Recipe> getRecipesWithIngredient(String ingredientName) {
+    public List<Recipe> getRecipesWithIngredient(Ingredient ingredient) {
         return getAllRecipes().stream()
-                .filter(recipe -> recipe.getIngredientsList().stream()
-                        .anyMatch(ingredient -> ingredient.getIngredientName().toLowerCase().equalsIgnoreCase(ingredientName)))
+                .filter(recipe -> recipe.getRecipeIngredients().stream()
+                        .map(RecipeIngredient::getIngredient)
+                        .anyMatch(i -> i.equals(ingredient)))
                 .collect(Collectors.toList());
     }
 }
