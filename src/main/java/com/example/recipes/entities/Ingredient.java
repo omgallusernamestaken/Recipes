@@ -1,8 +1,10 @@
 package com.example.recipes.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "ingredients")
@@ -22,6 +24,10 @@ public class Ingredient {
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private IngredientCategory category;
+
+    @ManyToMany(mappedBy = "ingredientsList")
+    @JsonBackReference
+    private Set<Recipe> recipes;
 
     public Ingredient() {
     }
@@ -56,6 +62,14 @@ public class Ingredient {
 
     public void setCategory(IngredientCategory category) {
         this.category = category;
+    }
+
+    public Set<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(Set<Recipe> recipes) {
+        this.recipes = recipes;
     }
 
     @Override

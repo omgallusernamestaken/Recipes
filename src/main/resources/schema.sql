@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS recipe_ingredients;
+DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS ingredients;
 DROP TABLE IF EXISTS ingredient_categories;
 
@@ -12,4 +14,21 @@ CREATE TABLE ingredients (
 	kcal_in_100g NUMERIC(10,2),
 	category_id INT NOT NULL,
 	FOREIGN KEY (category_id) REFERENCES ingredient_categories(category_id)
+);
+
+CREATE TABLE recipes (
+	recipe_id SERIAL PRIMARY KEY,
+	recipe_name VARCHAR(100) NOT NULL,
+	recipe_description TEXT,
+	recipe_category VARCHAR(20) NOT NULL,
+	portions_amount INTEGER
+);
+
+CREATE TABLE recipe_ingredients (
+    recipe_id BIGINT NOT NULL,
+    ingredient_id BIGINT NOT NULL,
+    quantity DOUBLE PRECISION,
+    PRIMARY KEY (recipe_id, ingredient_id),
+    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE,
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id) ON DELETE CASCADE
 );
