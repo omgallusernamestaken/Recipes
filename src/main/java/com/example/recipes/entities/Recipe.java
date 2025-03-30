@@ -2,11 +2,17 @@ package com.example.recipes.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name ="recipes")
 public class Recipe {
 
@@ -39,55 +45,6 @@ public class Recipe {
     // remember to update setters, getters, toString, hashcode, equals, thymeleaf
     //TODO: change into Opinion Object
     //private List<String> opinions;
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getRecipeName() {
-        return recipeName;
-    }
-
-    public void setRecipeName(String recipeName) {
-        this.recipeName = recipeName;
-    }
-
-    public String getRecipeDescription() {
-        return recipeDescription;
-    }
-
-    public void setRecipeDescription(String recipeDescription) {
-        this.recipeDescription = recipeDescription;
-    }
-
-    public List<RecipeIngredient> getRecipeIngredients() {
-        return recipeIngredients;
-    }
-
-    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
-        this.recipeIngredients = recipeIngredients;
-    }
-
-    public String getRecipeCategory() {
-        return recipeCategory;
-    }
-
-    public void setRecipeCategory(String recipeCategory) {
-        this.recipeCategory = recipeCategory;
-    }
-
-    public int getAmountOfPortions() {
-        return amountOfPortions;
-    }
-
-    public void setAmountOfPortions(int amountOfPortions) {
-        this.amountOfPortions = amountOfPortions;
-    }
 
     @Override
     public boolean equals(Object o) {

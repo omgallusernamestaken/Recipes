@@ -2,11 +2,17 @@ package com.example.recipes.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "ingredients")
 public class Ingredient {
 
@@ -28,49 +34,6 @@ public class Ingredient {
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonBackReference
     private List<RecipeIngredient> recipeIngredients;
-
-    public Ingredient() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getIngredientName() {
-        return ingredientName;
-    }
-
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
-    }
-
-    public double getKcalIn100g() {
-        return kcalIn100g;
-    }
-
-    public void setKcalIn100g(double caloriesIn100g) {
-        this.kcalIn100g = caloriesIn100g;
-    }
-
-    public IngredientCategory getCategory() {
-        return category;
-    }
-
-    public void setCategory(IngredientCategory category) {
-        this.category = category;
-    }
-
-    public List<RecipeIngredient> getRecipeIngredients() {
-        return recipeIngredients;
-    }
-
-    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
-        this.recipeIngredients = recipeIngredients;
-    }
 
     @Override
     public boolean equals(Object o) {

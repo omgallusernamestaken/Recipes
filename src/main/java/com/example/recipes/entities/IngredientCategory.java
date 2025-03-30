@@ -1,10 +1,16 @@
 package com.example.recipes.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
 @Table(name = "ingredient_categories")
 public class IngredientCategory {
 
@@ -15,33 +21,6 @@ public class IngredientCategory {
 
     @Column(name = "category_name")
     private String categoryName;
-
-    public IngredientCategory() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    @Override
-    public String toString() {
-        return "IngredientCategories{" +
-                "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {
