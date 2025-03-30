@@ -25,10 +25,11 @@ CREATE TABLE recipes (
 );
 
 CREATE TABLE recipe_ingredients (
+    id SERIAL PRIMARY KEY,
     recipe_id BIGINT NOT NULL,
     ingredient_id BIGINT NOT NULL,
-    quantity DOUBLE PRECISION,
-    PRIMARY KEY (recipe_id, ingredient_id),
+    quantity DOUBLE PRECISION NOT NULL,
+    unit VARCHAR(10) NOT NULL,
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE,
     FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id) ON DELETE CASCADE
 );

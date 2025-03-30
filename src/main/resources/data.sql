@@ -1,86 +1,107 @@
 INSERT INTO ingredient_categories (category_name) VALUES
-('Warzywa'),
-('Owoce'),
+('Mąki'),
 ('Nabiał'),
+('Napoje'),
 ('Mięso'),
-('Zboża'),
-('Tłuszcze'),
-('Przyprawy');
+('Warzywa'),
+('Sery'),
+('Przyprawy'),
+('Produkty zbożowe'),
+('Desery'),
+('Wołowina');
 
 INSERT INTO ingredients (ingredient_name, kcal_in_100g, category_id) VALUES
-('Marchew', 41.00, 1),
-('Pomidor', 18.00, 1),
-('Cebula', 40.00, 1),
-('Jabłko', 52.00, 2),
-('Banan', 89.00, 2),
-('Truskawka', 32.00, 2),
-('Mleko', 42.00, 3),
-('Ser żółty', 402.00, 3),
-('Kurczak', 165.00, 4),
-('Ryż', 130.00, 5);
+('Mąka pszenna', 365, 1),
+('Mąka kukurydziana', 362, 1),
+('Jajko', 155, 2),
+('Mleko 3.2%', 61, 3),
+('Masło', 717, 2),
+('Jogurt naturalny', 57, 2),
+('Kurczak', 165, 4),
+('Wołowina', 250, 10),
+('Pomidor', 18, 5),
+('Cebula', 40, 5),
+('Czosnek', 149, 7),
+('Papryka czerwona', 31, 5),
+('Ser feta', 264, 6),
+('Ser mozzarella', 280, 6),
+('Ser parmezan', 431, 6),
+('Ryż', 130, 8),
+('Makaron spaghetti', 131, 8),
+('Chleb żytni', 259, 8),
+('Bułka pszenna', 270, 8),
+('Miód', 304, 9),
+('Cukier', 387, 9),
+('Czekolada gorzka', 546, 9),
+('Mascarpone', 435, 9),
+('Śmietana 30%', 292, 2),
+('Woda', 0, 3),
+('Oliwa z oliwek', 884, 7),
+('Sól', 0, 7),
+('Pieprz czarny', 255, 7),
+('Bazylia', 251, 7),
+('Cynamon', 247, 7);
 
 INSERT INTO recipes (recipe_name, recipe_description, recipe_category, portions_amount) VALUES
-('Zupa pomidorowa', 'Kremowa zupa pomidorowa, idealna na obiad.', 'Zupy', 4),
-('Sałatka owocowa', 'Świeża sałatka owocowa, pełna witamin i smaku.', 'Sałatki', 2),
-('Kurczak z ryżem', 'Smażony kurczak podany z aromatycznym ryżem.', 'Mięso', 2),
-('Omlet z warzywami', 'Omlet z dodatkiem warzyw, doskonały na śniadanie.', 'Śniadania', 1),
-('Smoothie bananowe', 'Odżywcze smoothie z bananem i mlekiem.', 'Napoje', 2),
-('Koktajl truskawkowy', 'Pyszny koktajl z truskawek, mleka i jogurtu.', 'Napoje', 2),
-('Kurczak pieczony z warzywami', 'Pieczony kurczak w towarzystwie warzyw i przypraw.', 'Mięso', 4),
-('Tosty z serem', 'Proste tosty z roztopionym serem żółtym.', 'Przekąski', 2),
-('Ryż z warzywami', 'Lekka potrawa z ryżem i sezonowymi warzywami.', 'Wegetariańskie', 4),
-('Jabłka w cieście', 'Deser z jabłkami w cieście, doskonały na słodko.', 'Desery', 6);
+('Spaghetti Carbonara', 'Klasyczna włoska carbonara', 'Włoska', 2),
+('Naleśniki', 'Pyszne naleśniki na słodko', 'Śniadanie', 4),
+('Kurczak Curry', 'Pikantne curry z kurczakiem', 'Azjatycka', 3),
+('Sałatka Grecka', 'Świeża sałatka z fetą', 'Sałatki', 2),
+('Omlet', 'Prosty omlet z warzywami', 'Śniadanie', 1),
+('Zupa Pomidorowa', 'Tradycyjna zupa z makaronem', 'Zupy', 5),
+('Burger Wołowy', 'Domowy burger z wołowiną', 'Fast Food', 2),
+('Pizza Margherita', 'Klasyczna włoska pizza', 'Włoska', 4),
+('Tiramisu', 'Deser z mascarpone i kawą', 'Desery', 6),
+('Gulasz Węgierski', 'Pikantny gulasz z papryką', 'Węgierska', 4),
+('Lasagne', 'Włoska lazania z mięsem i serem', 'Włoska', 4),
+('Zupa Grzybowa', 'Aromatyczna zupa z grzybami', 'Zupy', 3),
+('Sernik', 'Tradycyjny sernik pieczony', 'Desery', 6),
+('Kurczak Pieczony', 'Kurczak z chrupiącą skórką', 'Mięsa', 4),
+('Frytki', 'Chrupiące frytki ziemniaczane', 'Fast Food', 3),
+('Zupa Ogórkowa', 'Tradycyjna zupa z kiszonych ogórków', 'Zupy', 4),
+('Kotlety Mielone', 'Soczyste kotlety mielone', 'Mięsa', 5),
+('Pierogi Ruskie', 'Pierogi z serem i ziemniakami', 'Polska', 4),
+('Sałatka Cezar', 'Sałatka z kurczakiem i sosem cezar', 'Sałatki', 2),
+('Zapiekanka Ziemniaczana', 'Zapiekanka z ziemniakami i serem', 'Zapiekanki', 4),
+('Kaszotto z Warzywami', 'Zdrowe kaszotto z warzywami', 'Zdrowe', 3),
+('Schabowy', 'Tradycyjny kotlet schabowy', 'Mięsa', 2),
+('Ryż z Warzywami', 'Szybki ryż z warzywami', 'Zdrowe', 4),
+('Tarta Czekoladowa', 'Tarta na kruchym cieście', 'Desery', 6),
+('Sushi', 'Tradycyjne japońskie sushi', 'Azjatycka', 4),
+('Kebab', 'Turecki kebab z mięsem i warzywami', 'Fast Food', 3),
+('Grillowany Łosoś', 'Łosoś z grilla z cytryną', 'Ryby', 2),
+('Owsianka', 'Zdrowa owsianka z owocami', 'Śniadanie', 1),
+('Muffiny', 'Czekoladowe muffiny', 'Desery', 6),
+('Placki Ziemniaczane', 'Chrupiące placki ziemniaczane', 'Polska', 3);
 
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(1, 2, 200), -- Pomidor
-(1, 3, 100), -- Cebula
-(1, 6, 50);  -- Truskawka (można dodać np. jako dekorację)
-
--- Sałatka owocowa
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(2, 4, 150), -- Jabłko
-(2, 5, 100), -- Banan
-(2, 6, 50);  -- Truskawka
-
--- Kurczak z ryżem
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(3, 9, 300), -- Kurczak
-(3, 10, 200); -- Ryż
-
--- Omlet z warzywami
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(4, 1, 100), -- Marchew
-(4, 3, 50),  -- Cebula
-(4, 5, 100); -- Banan
-
--- Smoothie bananowe
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(5, 5, 150), -- Banan
-(5, 7, 100); -- Mleko
-
--- Koktajl truskawkowy
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(6, 6, 200), -- Truskawka
-(6, 7, 100); -- Mleko
-
--- Kurczak pieczony z warzywami
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(7, 9, 400), -- Kurczak
-(7, 1, 200), -- Marchew
-(7, 3, 100); -- Cebula
-
--- Tosty z serem
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(8, 7, 50),  -- Mleko
-(8, 8, 100); -- Ser żółty
-
--- Ryż z warzywami
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(9, 10, 200), -- Ryż
-(9, 1, 150),  -- Marchew
-(9, 3, 100);  -- Cebula
-
--- Jabłka w cieście
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(10, 4, 200), -- Jabłko
-(10, 8, 100); -- Ser żółty
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity, unit) VALUES
+(1, 17, 200, 'GRAM'),
+(1, 2, 2, 'PIECE'),
+(1, 7, 1, 'PIECE'),
+(2, 1, 250, 'GRAM'),
+(2, 3, 500, 'MILLILITER'),
+(3, 4, 300, 'GRAM'),
+(3, 5, 100, 'GRAM'),
+(4, 6, 150, 'GRAM'),
+(5, 2, 3, 'PIECE'),
+(6, 5, 200, 'GRAM'),
+(7, 8, 300, 'GRAM'),
+(7, 19, 2, 'PIECE'),
+(8, 13, 250, 'GRAM'),
+(8, 14, 300, 'GRAM'),
+(9, 23, 200, 'GRAM'),
+(9, 9, 100, 'GRAM'),
+(10, 8, 350, 'GRAM'),
+(10, 10, 150, 'GRAM'),
+(11, 17, 250, 'GRAM'),
+(11, 7, 200, 'GRAM'),
+(12, 9, 150, 'GRAM'),
+(12, 10, 100, 'GRAM'),
+(13, 24, 300, 'GRAM'),
+(13, 5, 200, 'GRAM'),
+(14, 7, 400, 'GRAM'),
+(14, 8, 150, 'GRAM'),
+(15, 19, 3, 'PIECE'),
+(15, 26, 50, 'MILLILITER'),
+(16, 9, 300, 'GRAM'),
+(16, 27, 5, 'GRAM');
