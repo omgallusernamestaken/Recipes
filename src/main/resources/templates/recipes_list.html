@@ -18,6 +18,7 @@
     <tr>
         <th>Recipe Name</th>
         <th>Preparation Time</th>
+        <th>Difficulty</th>
     </tr>
     </thead>
     <tbody>
@@ -25,6 +26,7 @@
         style="cursor: pointer;">
         <td th:text="${recipe.recipeName}"></td>
         <td th:text="${recipe.preparationTime}"></td>
+        <td th:text="${recipe.difficulty.symbol}"></td>
     </tr>
     </tbody>
 </table>

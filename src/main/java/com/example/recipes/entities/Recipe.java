@@ -1,5 +1,6 @@
 package com.example.recipes.entities;
 
+import com.example.recipes.enums.Difficulty;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -52,16 +53,20 @@ public class Recipe {
     @Column(name = "preparation_time")
     private int preparationTime;
 
+    @Column(name = "difficulty")
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return id == recipe.id && amountOfPortions == recipe.amountOfPortions && preparationTime == recipe.preparationTime && Objects.equals(recipeName, recipe.recipeName) && Objects.equals(recipeDescription, recipe.recipeDescription) && Objects.equals(recipeIngredients, recipe.recipeIngredients) && Objects.equals(recipeTags, recipe.recipeTags);
+        return id == recipe.id && amountOfPortions == recipe.amountOfPortions && preparationTime == recipe.preparationTime && Objects.equals(recipeName, recipe.recipeName) && Objects.equals(recipeDescription, recipe.recipeDescription) && Objects.equals(recipeIngredients, recipe.recipeIngredients) && Objects.equals(recipeTags, recipe.recipeTags) && difficulty == recipe.difficulty;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, recipeName, recipeDescription, recipeIngredients, recipeTags, amountOfPortions, preparationTime);
+        return Objects.hash(id, recipeName, recipeDescription, recipeIngredients, recipeTags, amountOfPortions, preparationTime, difficulty);
     }
 }

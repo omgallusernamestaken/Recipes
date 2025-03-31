@@ -28,12 +28,12 @@ INSERT INTO tags (tag_name) VALUES
 ('Kolacja');
 
 -- INSERT dla recipes (przepisy)
-INSERT INTO recipes (recipe_name, recipe_description, portions_amount, preparation_time) VALUES 
-('Sałatka warzywna', 'Zdrowa sałatka z marchewką i pomidorem', 2, 15),
-('Kurczak pieczony', 'Soczysty kurczak z piekarnika', 4, 60),
-('Makaron z jogurtem', 'Makaron z sosem jogurtowym i bananem', 2, 10),
-('Owsianka z jabłkiem', 'Pyszna owsianka z jabłkiem i mlekiem', 1, 5),
-('Stek wołowy', 'Klasyczny stek wołowy smażony na patelni', 1, 20);
+INSERT INTO recipes (recipe_name, recipe_description, portions_amount, preparation_time, difficulty) VALUES
+('Sałatka warzywna', 'Zdrowa sałatka z marchewką i pomidorem', 2, 15, 'EASY'),
+('Kurczak pieczony', 'Soczysty kurczak z piekarnika', 4, 60, 'EASY'),
+('Makaron z jogurtem', 'Makaron z sosem jogurtowym i bananem', 2, 10, 'HARD'),
+('Owsianka z jabłkiem', 'Pyszna owsianka z jabłkiem i mlekiem', 1, 5, 'HARD'),
+('Stek wołowy', 'Klasyczny stek wołowy smażony na patelni', 1, 20, 'HARD');
 
 -- INSERT dla recipe_ingredients (składniki w przepisach)
 INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES 
