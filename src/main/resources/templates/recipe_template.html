@@ -8,28 +8,19 @@
 
 <body>
 <h1 th:text="${recipe.recipeName}"></h1>
-<p><strong>Category:</strong> <span th:text="${recipe.recipeCategory}"></span></p>
 <p><strong>Description:</strong> <span th:text="${recipe.recipeDescription}"></span></p>
 <p><strong>Portions amount:</strong> <span th:text="${recipe.amountOfPortions}"></span></p>
 <p><strong>Cooking time:</strong> <span th:text="${recipe.preparationTime}"></span> minut</p>
 
+<p><strong>Tags:</strong></p>
+<p th:each="tag : ${recipe.recipeTags}" th:text="${tag.tagName}"></p>
+
 <h2>Ingredients:</h2>
-<table>
-  <thead>
-  <tr>
-    <th>Ingredient</th>
-    <th>Amount</th>
-    <th>Unit</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="recipeIngredient : ${recipe.recipeIngredients}">
-    <td th:text="${recipeIngredient.ingredient.ingredientName}"></td>
-    <td th:text="${recipeIngredient.quantity}"></td>
-    <td th:text="${recipeIngredient.ingredient.unit}"></td>
-  </tr>
-  </tbody>
-</table>
+
+  <ul th:each="recipeIngredient : ${recipe.recipeIngredients}">
+    <li th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + ' ' + recipeIngredient.ingredient.unit.symbol}"></li>
+  </ul>
+
 <br>
 <button onclick="window.location.href='/recipes/all'">
   Zobacz wszystkie przepisy

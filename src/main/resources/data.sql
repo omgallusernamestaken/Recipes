@@ -1,108 +1,59 @@
-INSERT INTO ingredient_categories (category_name) VALUES
-('Mąki'),
-('Nabiał'),
-('Napoje'),
-('Mięso'),
+-- INSERT dla ingredient_categories (kategorie składników)
+INSERT INTO ingredient_categories (category_name) VALUES 
 ('Warzywa'),
-('Sery'),
-('Przyprawy'),
-('Produkty zbożowe'),
-('Desery'),
-('Wołowina');
+('Owoce'),
+('Mięso'),
+('Nabiał'),
+('Zboża');
 
-INSERT INTO ingredients (ingredient_name, kcal_in_100g, category_id, unit) VALUES
-('Mąka pszenna', 365, 1, 'GRAM'),
-('Mąka kukurydziana', 362, 1, 'GRAM'),
-('Jajko', 155, 2, 'PIECE'),
-('Mleko 3.2%', 61, 3, 'MILLILITER'),
-('Masło', 717, 2, 'GRAM'),
-('Jogurt naturalny', 57, 2, 'GRAM'),
-('Kurczak', 165, 4, 'GRAM'),
-('Wołowina', 250, 10, 'GRAM'),
-('Pomidor', 18, 5, 'GRAM'),
-('Cebula', 40, 5, 'GRAM'),
-('Czosnek', 149, 7, 'GRAM'),
-('Papryka czerwona', 31, 5, 'GRAM'),
-('Ser feta', 264, 6, 'GRAM'),
-('Ser mozzarella', 280, 6, 'GRAM'),
-('Ser parmezan', 431, 6, 'GRAM'),
-('Ryż', 130, 8, 'GRAM'),
-('Makaron spaghetti', 131, 8, 'GRAM'),
-('Chleb żytni', 259, 8, 'GRAM'),
-('Bułka pszenna', 270, 8, 'PIECE'),
-('Miód', 304, 9, 'GRAM'),
-('Cukier', 387, 9, 'GRAM'),
-('Czekolada gorzka', 546, 9, 'GRAM'),
-('Mascarpone', 435, 9, 'GRAM'),
-('Śmietana 30%', 292, 2, 'MILLILITER'),
-('Woda', 0, 3, 'MILLILITER'),
-('Oliwa z oliwek', 884, 7, 'MILLILITER'),
-('Sól', 0, 7, 'GRAM'),
-('Pieprz czarny', 255, 7, 'GRAM'),
-('Bazylia', 251, 7, 'GRAM'),
-('Cynamon', 247, 7, 'GRAM');
+-- INSERT dla ingredients (składniki)
+INSERT INTO ingredients (ingredient_name, kcal_in_100g, category_id, unit) VALUES 
+('Marchew', 41.00, 1, 'GRAM'),
+('Pomidor', 18.00, 1, 'GRAM'),
+('Jabłko', 52.00, 2, 'GRAM'),
+('Banan', 89.00, 2, 'GRAM'),
+('Kurczak', 165.00, 3, 'GRAM'),
+('Wołowina', 250.00, 3, 'GRAM'),
+('Mleko', 42.00, 4, 'MILLILITER'),
+('Jogurt', 59.00, 4, 'GRAM'),
+('Makaron', 365.00, 5, 'GRAM'),
+('Ryż', 130.00, 5, 'GRAM');
 
-INSERT INTO recipes (recipe_name, recipe_description, recipe_category, portions_amount, preparation_time) VALUES
-('Spaghetti Carbonara', 'Klasyczna włoska carbonara', 'Włoska', 2, 20),
-('Naleśniki', 'Pyszne naleśniki na słodko', 'Śniadanie', 4, 20),
-('Kurczak Curry', 'Pikantne curry z kurczakiem', 'Azjatycka', 3, 30),
-('Sałatka Grecka', 'Świeża sałatka z fetą', 'Sałatki', 2, 25),
-('Omlet', 'Prosty omlet z warzywami', 'Śniadanie', 1, 20),
-('Zupa Pomidorowa', 'Tradycyjna zupa z makaronem', 'Zupy', 5, 20),
-('Burger Wołowy', 'Domowy burger z wołowiną', 'Fast Food', 2, 20),
-('Pizza Margherita', 'Klasyczna włoska pizza', 'Włoska', 4, 20),
-('Tiramisu', 'Deser z mascarpone i kawą', 'Desery', 6, 20),
-('Gulasz Węgierski', 'Pikantny gulasz z papryką', 'Węgierska', 4, 20),
-('Lasagne', 'Włoska lazania z mięsem i serem', 'Włoska', 4, 20),
-('Zupa Grzybowa', 'Aromatyczna zupa z grzybami', 'Zupy', 3, 20),
-('Sernik', 'Tradycyjny sernik pieczony', 'Desery', 6, 20),
-('Kurczak Pieczony', 'Kurczak z chrupiącą skórką', 'Mięsa', 4, 20),
-('Frytki', 'Chrupiące frytki ziemniaczane', 'Fast Food', 3, 20),
-('Zupa Ogórkowa', 'Tradycyjna zupa z kiszonych ogórków', 'Zupy', 4, 20),
-('Kotlety Mielone', 'Soczyste kotlety mielone', 'Mięsa', 5, 20),
-('Pierogi Ruskie', 'Pierogi z serem i ziemniakami', 'Polska', 4, 20),
-('Sałatka Cezar', 'Sałatka z kurczakiem i sosem cezar', 'Sałatki', 2, 20),
-('Zapiekanka Ziemniaczana', 'Zapiekanka z ziemniakami i serem', 'Zapiekanki', 4, 20),
-('Kaszotto z Warzywami', 'Zdrowe kaszotto z warzywami', 'Zdrowe', 3, 20),
-('Schabowy', 'Tradycyjny kotlet schabowy', 'Mięsa', 2, 20),
-('Ryż z Warzywami', 'Szybki ryż z warzywami', 'Zdrowe', 4, 20),
-('Tarta Czekoladowa', 'Tarta na kruchym cieście', 'Desery', 6, 20),
-('Sushi', 'Tradycyjne japońskie sushi', 'Azjatycka', 4, 20),
-('Kebab', 'Turecki kebab z mięsem i warzywami', 'Fast Food', 3, 20),
-('Grillowany Łosoś', 'Łosoś z grilla z cytryną', 'Ryby', 2, 20),
-('Owsianka', 'Zdrowa owsianka z owocami', 'Śniadanie', 1, 20),
-('Muffiny', 'Czekoladowe muffiny', 'Desery', 6, 20),
-('Placki Ziemniaczane', 'Chrupiące placki ziemniaczane', 'Polska', 3, 20);
+-- INSERT dla tags (tagi)
+INSERT INTO tags (tag_name) VALUES 
+('Wegetariańskie'),
+('Bezglutenowe'),
+('Szybkie'),
+('Obiad'),
+('Kolacja');
 
-INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES
-(1, 17, 200),
-(1, 3, 200),
-(1, 2, 2),
-(1, 7, 1),
-(2, 1, 250),
-(2, 3, 500),
-(3, 4, 300),
-(3, 5, 100),
-(4, 6, 150),
-(5, 2, 3),
-(6, 5, 200),
-(7, 8, 300),
-(7, 19, 2),
-(8, 13, 250),
-(8, 14, 300),
-(9, 23, 200),
-(9, 9, 100),
-(10, 8, 350),
-(10, 10, 150),
-(11, 17, 250),
-(11, 7, 200),
-(12, 9, 150),
-(12, 10, 100),
-(13, 24, 300),
-(13, 5, 200),
-(14, 7, 400),
-(14, 8, 150),
-(15, 19, 3),
-(15, 26, 50),
-(16, 9, 300),
-(16, 27, 5);
+-- INSERT dla recipes (przepisy)
+INSERT INTO recipes (recipe_name, recipe_description, portions_amount, preparation_time) VALUES 
+('Sałatka warzywna', 'Zdrowa sałatka z marchewką i pomidorem', 2, 15),
+('Kurczak pieczony', 'Soczysty kurczak z piekarnika', 4, 60),
+('Makaron z jogurtem', 'Makaron z sosem jogurtowym i bananem', 2, 10),
+('Owsianka z jabłkiem', 'Pyszna owsianka z jabłkiem i mlekiem', 1, 5),
+('Stek wołowy', 'Klasyczny stek wołowy smażony na patelni', 1, 20);
+
+-- INSERT dla recipe_ingredients (składniki w przepisach)
+INSERT INTO recipe_ingredients (recipe_id, ingredient_id, quantity) VALUES 
+(1, 1, 100), -- Marchew do sałatki
+(1, 2, 150), -- Pomidor do sałatki
+(2, 5, 250), -- Kurczak do kurczaka pieczonego
+(3, 9, 200), -- Makaron do makaronu z jogurtem
+(3, 8, 100), -- Jogurt do makaronu z jogurtem
+(3, 4, 50),  -- Banan do makaronu z jogurtem
+(4, 3, 150), -- Jabłko do owsianki
+(4, 7, 200), -- Mleko do owsianki
+(5, 6, 300); -- Wołowina do steka
+
+-- INSERT dla recipe_tags (przypisanie tagów do przepisów)
+INSERT INTO recipe_tags (recipe_id, tag_id) VALUES 
+(1, 1), -- Sałatka warzywna - wegetariańska
+(1, 2), -- Sałatka warzywna - bezglutenowa
+(2, 4), -- Kurczak pieczony - obiad
+(3, 1), -- Makaron z jogurtem - wegetariańskie
+(3, 3), -- Makaron z jogurtem - szybkie
+(4, 1), -- Owsianka z jabłkiem - wegetariańskie
+(4, 3), -- Owsianka z jabłkiem - szybkie
+(5, 4); -- Stek wołowy - obiad

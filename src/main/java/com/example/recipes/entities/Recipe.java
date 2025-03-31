@@ -34,12 +34,12 @@ public class Recipe {
     @JsonManagedReference
     private List<RecipeIngredient> recipeIngredients;
 
-    @Column(name = "recipe_category")
-    private String recipeCategory;
-
-    //TODO later
-    // remember to update setters, getters, toString, hashcode, equals, thymeleaf
-//    private List<String> tagList;
+    @ManyToMany
+    @JoinTable(
+            name = "recipe_tags",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<RecipeTag> recipeTags;
 
     @Column(name = "portions_amount")
     private int amountOfPortions;
@@ -57,11 +57,11 @@ public class Recipe {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return id == recipe.id && amountOfPortions == recipe.amountOfPortions && preparationTime == recipe.preparationTime && Objects.equals(recipeName, recipe.recipeName) && Objects.equals(recipeDescription, recipe.recipeDescription) && Objects.equals(recipeIngredients, recipe.recipeIngredients) && Objects.equals(recipeCategory, recipe.recipeCategory);
+        return id == recipe.id && amountOfPortions == recipe.amountOfPortions && preparationTime == recipe.preparationTime && Objects.equals(recipeName, recipe.recipeName) && Objects.equals(recipeDescription, recipe.recipeDescription) && Objects.equals(recipeIngredients, recipe.recipeIngredients) && Objects.equals(recipeTags, recipe.recipeTags);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, recipeName, recipeDescription, recipeIngredients, recipeCategory, amountOfPortions, preparationTime);
+        return Objects.hash(id, recipeName, recipeDescription, recipeIngredients, recipeTags, amountOfPortions, preparationTime);
     }
 }

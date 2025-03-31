@@ -11,27 +11,27 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "ingredient_categories")
-public class IngredientCategory {
+@Table(name = "tags")
+public class RecipeTag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "category_id")
+    @Column(name = "tag_id")
     private long id;
 
-    @Column(name = "category_name")
-    private String categoryName;
+    @Column(name = "tag_name")
+    private String tagName;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        IngredientCategory that = (IngredientCategory) o;
-        return id == that.id && Objects.equals(categoryName, that.categoryName);
+        RecipeTag recipeTag = (RecipeTag) o;
+        return id == recipeTag.id && Objects.equals(tagName, recipeTag.tagName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, categoryName);
+        return Objects.hash(id, tagName);
     }
 }

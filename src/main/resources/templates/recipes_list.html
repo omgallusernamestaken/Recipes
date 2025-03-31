@@ -17,7 +17,6 @@
     <thead>
     <tr>
         <th>Recipe Name</th>
-        <th>Category</th>
         <th>Preparation Time</th>
     </tr>
     </thead>
@@ -25,7 +24,6 @@
     <tr th:each="recipe : ${recipes}" th:attr="onclick='window.location.href=\'/recipes/recipe/' + ${recipe.id} + '\''"
         style="cursor: pointer;">
         <td th:text="${recipe.recipeName}"></td>
-        <td th:text="${recipe.recipeCategory}"></td>
         <td th:text="${recipe.preparationTime}"></td>
     </tr>
     </tbody>

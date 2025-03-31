@@ -1,0 +1,48 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Add recipe</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<h1 th:if="${isEdit}">Edit recipe</h1>-->
+<!--<h1 th:unless="${isEdit}">Add recipe</h1>-->
+
+<!--<form th:action="@{/recipes/add}" th:object="${recipe}" method="post">-->
+<!--    <input type="hidden" th:field="*{id}" />-->
+
+<!--    <label for="recipeName">Recipe name:</label>-->
+<!--    <input type="text" id="recipeName" th:field="*{recipeName}" required>-->
+
+<!--    <label for="recipeDescription">Description:</label>-->
+<!--    <input type="text" id="recipeDescription" th:field="*{recipeDescription}" required>-->
+
+
+<!--&lt;!&ndash;    ingredients&ndash;&gt;-->
+<!--&lt;!&ndash;    category&ndash;&gt;-->
+
+<!--    <label for="amountOfPortions">Portions:</label>-->
+<!--    <input type="text" id="amountOfPortions" th:field="*{amountOfPortions}" required>-->
+
+<!--    <label for="preparationTime">Preparation time:</label>-->
+<!--    <input type="text" id="preparationTime" th:field="*{preparationTime}" required>-->
+
+
+
+
+<!--    <label for="category">Kategoria składnika:</label>-->
+<!--    <select id="category" th:field="*{category}">-->
+<!--        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.categoryName}"></option>-->
+<!--    </select>-->
+
+<!--    <label for="unit">Jednostka miary:</label>-->
+<!--    <select id="unit" th:field="*{unit}">-->
+<!--        <option th:each="unit : ${T(com.example.recipes.enums.Unit).values()}" th:value="${unit}" th:text="${unit}"></option>-->
+<!--    </select>-->
+
+<!--    <button type="submit">Wyślij</button>-->
+<!--</form>-->
+
+<!--</body>-->
+<!--</html>-->

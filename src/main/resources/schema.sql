@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS recipe_ingredients;
+DROP TABLE IF EXISTS recipe_tags;
 DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS ingredients;
+DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS ingredient_categories;
 
 CREATE TABLE ingredient_categories (
@@ -17,13 +19,25 @@ CREATE TABLE ingredients (
 	FOREIGN KEY (category_id) REFERENCES ingredient_categories(category_id)
 );
 
+CREATE TABLE tags (
+    tag_id SERIAL PRIMARY KEY,
+    tag_name VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE recipes (
 	recipe_id SERIAL PRIMARY KEY,
 	recipe_name VARCHAR(100) NOT NULL,
 	recipe_description TEXT,
-	recipe_category VARCHAR(20) NOT NULL,
 	portions_amount INTEGER,
 	preparation_time INTEGER
+);
+
+CREATE TABLE recipe_tags (
+    id SERIAL PRIMARY KEY,
+    recipe_id BIGINT NOT NULL,
+    tag_id BIGINT NOT NULL,
+    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id),
+    FOREIGN KEY (tag_id) REFERENCES tags(tag_id)
 );
 
 CREATE TABLE recipe_ingredients (
