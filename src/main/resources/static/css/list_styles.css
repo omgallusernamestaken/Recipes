@@ -1,126 +1,45 @@
-/* Ogólny styl strony */
+/* Ogólne ustawienia strony */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    background-color: #fffaf0;
+    color: #4a4a4a;
+    margin: 40px auto;
+    max-width: 800px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-/* Nagłówek */
 h1 {
-    font-size: 2.5em;
-    color: #333;
-    text-align: center;
+    color: #d2691e;
     margin-bottom: 20px;
 }
 
-/* Tabela */
+/* Styl dla tabeli */
 table {
-    width: 80%;
-    margin: 20px auto;
+    width: 100%;
     border-collapse: collapse;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
-/* Nagłówki tabeli */
-th {
-    padding: 15px;
-    background-color: #4CAF50;
+thead {
+    background-color: #ff8c00;
     color: white;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
     text-align: left;
-    font-size: 1.1em;
 }
 
-/* Komórki tabeli */
-td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #f2f2f2;
-    color: #555;
-}
-
-/* Wiersze tabeli */
-tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #eaeaea;
-}
-
-/* Stylizacja przycisków */
-.button {
-    padding: 8px 16px;
-    margin: 5px;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
+tbody tr {
+    background-color: #ffefd5;
     transition: background-color 0.3s;
 }
 
-.button.edit {
-    background-color: #4CAF50;
-}
-
-.button.delete {
-    background-color: #f44336;
-}
-
-/* Efekt hover przycisków */
-.button:hover {
-    opacity: 0.8;
-}
-
-/* Komunikat o braku składników */
-div {
-    text-align: center;
-    font-size: 1.2em;
-    color: #888;
-}
-
-/* Styl dla formularzy (w przyszłości, jak np. dla edytowania składnika) */
-input, select, button {
-    padding: 10px;
-    font-size: 1em;
-    margin: 10px 0;
-    width: 100%;
-    max-width: 400px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-input[type="text"], input[type="number"] {
-    background-color: #fff;
-    margin-bottom: 15px;
-}
-
-button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
+tbody tr:hover {
+    background-color: #f4a460;
     cursor: pointer;
-    font-weight: bold;
-}
-
-button[type="submit"]:hover {
-    background-color: #45a049;
-}
-
-/* Responsywność */
-@media screen and (max-width: 768px) {
-    table {
-        width: 95%;
-    }
-
-    h1 {
-        font-size: 2em;
-    }
 }

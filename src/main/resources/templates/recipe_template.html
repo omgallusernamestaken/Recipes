@@ -15,10 +15,10 @@
 <p><strong>Tags:</strong></p>
 <p th:each="tag : ${recipe.recipeTags}" th:text="${tag.tagName}"></p>
 
-<h2>Ingredients:</h2>
+<h1>Ingredients:</h1>
 
   <ul th:each="recipeIngredient : ${recipe.recipeIngredients}">
-    <li th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + ' ' + recipeIngredient.ingredient.unit.symbol}"></li>
+    <li th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + recipeIngredient.ingredient.unit.symbol}"></li>
   </ul>
 
 <br>
