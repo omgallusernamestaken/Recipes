@@ -45,7 +45,7 @@ CREATE TABLE recipe_ingredients (
     id SERIAL PRIMARY KEY,
     recipe_id BIGINT NOT NULL,
     ingredient_id BIGINT NOT NULL,
-    quantity DOUBLE PRECISION NOT NULL,
+    quantity INTEGER NOT NULL,
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE,
     FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id) ON DELETE CASCADE
 );
