@@ -13,6 +13,7 @@ CREATE TABLE ingredients (
 	ingredient_name VARCHAR(100) UNIQUE NOT NULL,
 	kcal_in_100g NUMERIC(10,2),
 	category_id INT NOT NULL,
+	unit VARCHAR(10) NOT NULL,
 	FOREIGN KEY (category_id) REFERENCES ingredient_categories(category_id)
 );
 
@@ -29,7 +30,6 @@ CREATE TABLE recipe_ingredients (
     recipe_id BIGINT NOT NULL,
     ingredient_id BIGINT NOT NULL,
     quantity DOUBLE PRECISION NOT NULL,
-    unit VARCHAR(10) NOT NULL,
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE,
     FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id) ON DELETE CASCADE
 );

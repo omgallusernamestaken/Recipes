@@ -1,6 +1,5 @@
 package com.example.recipes.entities;
 
-import com.example.recipes.enums.Unit;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,9 +27,5 @@ public class RecipeIngredient {
 
     @Column(name = "quantity", nullable = false)
     private double quantity;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "unit", nullable = false)
-    private Unit unit;
 }
 
