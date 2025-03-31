@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe</title>
+  <link rel="stylesheet" href="/css/recipe_template_styles.css">
+</head>
+
+<body>
+<h1 th:text="${recipe.recipeName}"></h1>
+<p><strong>Category:</strong> <span th:text="${recipe.recipeCategory}"></span></p>
+<p><strong>Description:</strong> <span th:text="${recipe.recipeDescription}"></span></p>
+<p><strong>Portions amount:</strong> <span th:text="${recipe.amountOfPortions}"></span></p>
+<p><strong>Cooking time:</strong> <span th:text="${recipe.preparationTime}"></span> minut</p>
+
+<h2>Ingredients:</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Ingredient</th>
+    <th>Amount</th>
+    <th>Unit</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="recipeIngredient : ${recipe.recipeIngredients}">
+    <td th:text="${recipeIngredient.ingredient.ingredientName}"></td>
+    <td th:text="${recipeIngredient.quantity}"></td>
+    <td th:text="${recipeIngredient.ingredient.unit}"></td>
+  </tr>
+  </tbody>
+</table>
+<br>
+<button onclick="window.location.href='/recipes/all'">
+  Zobacz wszystkie przepisy
+</button>
+</body>
+</html>

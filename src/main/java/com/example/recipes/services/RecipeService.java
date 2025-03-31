@@ -33,4 +33,8 @@ public class RecipeService {
                         .anyMatch(i -> i.equals(ingredient)))
                 .collect(Collectors.toList());
     }
+
+    public Recipe getRecipeById(Long id) {
+        return recipesRepository.findById(id).get();
+    }
 }

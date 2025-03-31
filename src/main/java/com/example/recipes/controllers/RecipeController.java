@@ -32,13 +32,14 @@ public class RecipeController {
         return "recipes_list";
     }
 
-    @GetMapping("/recipe/{namePart}")
+    @GetMapping("/recipebyname/{namePart}")
     public String getRecipesThatNameContains(@PathVariable String namePart, Model model) {
         List<Recipe> recipeList = recipeService.getRecipesThatNameContains(namePart);
         model.addAttribute("recipes", recipeList);
         return "recipes_list";
     }
 
+    //TODO fix case sensitivity
     @GetMapping("/ingredients/{ingredientName}")
     public String getRecipesWithIngredient(@PathVariable String ingredientName, Model model) {
         Ingredient ingredient = ingredientService.getByName(ingredientName)
@@ -47,5 +48,13 @@ public class RecipeController {
         List<Recipe> recipeList = recipeService.getRecipesWithIngredient(ingredient);
         model.addAttribute("recipes", recipeList);
         return "recipes_list";
+    }
+
+    @GetMapping("/recipe/{id}")
+    public String getRecipeById(@PathVariable Long id, Model model) {
+        Recipe recipe = recipeService.getRecipeById(id);
+        System.out.println(recipe);
+        model.addAttribute("recipe", recipe);
+        return "recipe_template";
     }
 }

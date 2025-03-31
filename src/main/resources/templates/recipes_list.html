@@ -22,7 +22,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="recipe : ${recipes}">
+    <tr th:each="recipe : ${recipes}" th:attr="onclick='window.location.href=\'/recipes/recipe/' + ${recipe.id} + '\''"
+        style="cursor: pointer;">
         <td th:text="${recipe.recipeName}"></td>
         <td th:text="${recipe.recipeCategory}"></td>
         <td th:text="${recipe.preparationTime}"></td>
