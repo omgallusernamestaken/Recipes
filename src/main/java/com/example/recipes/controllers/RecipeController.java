@@ -53,7 +53,6 @@ public class RecipeController {
     @GetMapping("/recipe/{id}")
     public String getRecipeById(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
-        System.out.println(recipe);
         model.addAttribute("recipe", recipe);
         return "recipe_template";
     }

@@ -24,7 +24,6 @@ public class IngredientController {
     @GetMapping("/all")
     public String getAllIngredients(Model model) {
         List<Ingredient> listOfIngredients = ingredientService.getAllIngredients();
-        System.out.println(listOfIngredients);
         model.addAttribute("ingredients", listOfIngredients);
         return "ingredients_list";
     }
@@ -56,6 +55,12 @@ public class IngredientController {
     @PostMapping("/edit")
     public String editIngredient(@ModelAttribute Ingredient ingredient) {
         ingredientService.update(ingredient);
+        return "redirect:/ingredients/all";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteIngredient(@PathVariable Long id) {
+        ingredientService.deleteById(id);
         return "redirect:/ingredients/all";
     }
 }

@@ -9,18 +9,17 @@
 <body>
 <h1>Ingredients List</h1>
 
-<!-- Sprawdzamy, czy lista składników jest pusta -->
 <div th:if="${#lists.isEmpty(ingredients)}">
     <p>No ingredients found.</p>
 </div>
 
-<!-- Wyświetlamy składniki w tabeli -->
 <table>
     <thead>
     <tr>
         <th>Ingredient Name</th>
         <th>Calories per 100g</th>
         <th>Category</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -28,6 +27,17 @@
         <td th:text="${ingredient.ingredientName}"></td>
         <td th:text="${ingredient.kcalIn100g}"></td>
         <td th:text="${ingredient.category.categoryName}"></td>
+        <td>
+            <!-- Przycisk do edycji -->
+            <form th:action="@{/ingredients/edit/{id}(id=${ingredient.id})}" method="get" style="display:inline;">
+                <button type="submit" class="button edit">Edit</button>
+            </form>
+
+            <!-- Przycisk do usuwania -->
+            <form th:action="@{/ingredients/delete/{id}(id=${ingredient.id})}" style="display:inline;">
+                <button type="submit" class="button delete" th:onclick="return confirm('Are you sure you want to delete this ingredient?')">Delete</button>
+            </form>
+        </td>
     </tr>
     </tbody>
 </table>
