@@ -6,9 +6,12 @@
 </head>
 <body>
 
-<h1>Dodaj Nowy Składnik</h1>
+<h1 th:if="${isEdit}">Edytuj Składnik</h1>
+<h1 th:unless="${isEdit}">Dodaj Nowy Składnik</h1>
 
 <form th:action="@{/ingredients/add}" th:object="${ingredient}" method="post">
+  <input type="hidden" th:field="*{id}" />
+
   <label for="ingredientName">Nazwa składnika:</label>
   <input type="text" id="ingredientName" th:field="*{ingredientName}" required>
 
@@ -25,7 +28,7 @@
     <option th:each="unit : ${T(com.example.recipes.enums.Unit).values()}" th:value="${unit}" th:text="${unit}"></option>
   </select>
 
-  <button type="submit">Dodaj Składnik</button>
+  <button type="submit">Wyślij</button>
 </form>
 
 </body>

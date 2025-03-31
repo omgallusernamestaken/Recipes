@@ -16,4 +16,5 @@ public class IngredientCategoryService {
     public List<IngredientCategory> findAll() {
         return ingredientCategoryRepository.findAll();
     }
+
 }

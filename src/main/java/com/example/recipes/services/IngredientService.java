@@ -3,6 +3,7 @@ package com.example.recipes.services;
 import com.example.recipes.entities.Ingredient;
 import com.example.recipes.repositories.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +20,18 @@ public class IngredientService {
     }
 
     public List<Ingredient> getAllIngredients() {
-        return ingredientRepository.findAll();
+        return ingredientRepository.findAll(Sort.by(Sort.Order.asc("id")));
     }
 
     public void save(Ingredient ingredient) {
+        ingredientRepository.save(ingredient);
+    }
+
+    public Optional<Ingredient> getById(Long id) {
+        return ingredientRepository.findById(id);
+    }
+
+    public void update(Ingredient ingredient) {
         ingredientRepository.save(ingredient);
     }
 }

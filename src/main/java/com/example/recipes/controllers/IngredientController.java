@@ -7,10 +7,7 @@ import com.example.recipes.services.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class IngredientController {
     private IngredientService ingredientService;
 
     @Autowired
-    IngredientCategoryService ingredientCategoryService;
+    private IngredientCategoryService ingredientCategoryService;
 
     @GetMapping("/all")
     public String getAllIngredients(Model model) {
@@ -43,6 +40,22 @@ public class IngredientController {
     @PostMapping("add")
     public String addIngredient(@ModelAttribute Ingredient ingredient) {
         ingredientService.save(ingredient);
+        return "redirect:/ingredients/all";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editIngredient(@PathVariable Long id, Model model) {
+        Ingredient ingredient = ingredientService.getById(id).get();
+        model.addAttribute("ingredient", ingredient);
+        model.addAttribute("categories", ingredientCategoryService.findAll());
+        model.addAttribute("isEdit", true);
+        model.addAttribute("id", ingredient.getId());
+        return "ingredient_add";
+    }
+
+    @PostMapping("/edit")
+    public String editIngredient(@ModelAttribute Ingredient ingredient) {
+        ingredientService.update(ingredient);
         return "redirect:/ingredients/all";
     }
 }
