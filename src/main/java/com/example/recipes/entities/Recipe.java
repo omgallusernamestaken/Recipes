@@ -49,16 +49,19 @@ public class Recipe {
     //TODO: change into Opinion Object
     //private List<String> opinions;
 
+    @Column(name = "preparation_time")
+    private int preparationTime;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return id == recipe.id && amountOfPortions == recipe.amountOfPortions && Objects.equals(recipeName, recipe.recipeName) && Objects.equals(recipeDescription, recipe.recipeDescription) && Objects.equals(recipeIngredients, recipe.recipeIngredients) && Objects.equals(recipeCategory, recipe.recipeCategory);
+        return id == recipe.id && amountOfPortions == recipe.amountOfPortions && preparationTime == recipe.preparationTime && Objects.equals(recipeName, recipe.recipeName) && Objects.equals(recipeDescription, recipe.recipeDescription) && Objects.equals(recipeIngredients, recipe.recipeIngredients) && Objects.equals(recipeCategory, recipe.recipeCategory);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, recipeName, recipeDescription, recipeIngredients, recipeCategory, amountOfPortions);
+        return Objects.hash(id, recipeName, recipeDescription, recipeIngredients, recipeCategory, amountOfPortions, preparationTime);
     }
 }

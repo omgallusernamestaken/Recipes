@@ -6,16 +6,17 @@ import com.example.recipes.services.IngredientService;
 import com.example.recipes.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RequestMapping("/recipes")
-@RestController
+@Controller
 public class RecipeController {
 
     @Autowired
@@ -25,20 +26,26 @@ public class RecipeController {
     private IngredientService ingredientService;
 
     @GetMapping("/all")
-    public List<Recipe> getAllRecipes() {
-        return recipeService.getAllRecipes();
+    public String getAllRecipes(Model model) {
+        List<Recipe> recipeList = recipeService.getAllRecipes();
+        model.addAttribute("recipes", recipeList);
+        return "recipes_list";
     }
 
     @GetMapping("/recipe/{namePart}")
-    public List<Recipe> getRecipesThatNameContains(@PathVariable String namePart) {
-        return recipeService.getRecipesThatNameContains(namePart);
+    public String getRecipesThatNameContains(@PathVariable String namePart, Model model) {
+        List<Recipe> recipeList = recipeService.getRecipesThatNameContains(namePart);
+        model.addAttribute("recipes", recipeList);
+        return "recipes_list";
     }
 
     @GetMapping("/ingredients/{ingredientName}")
-    public List<Recipe> getRecipesWithIngredient(@PathVariable String ingredientName) {
+    public String getRecipesWithIngredient(@PathVariable String ingredientName, Model model) {
         Ingredient ingredient = ingredientService.getByName(ingredientName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ingredient not found"));
 
-        return recipeService.getRecipesWithIngredient(ingredient);
+        List<Recipe> recipeList = recipeService.getRecipesWithIngredient(ingredient);
+        model.addAttribute("recipes", recipeList);
+        return "recipes_list";
     }
 }

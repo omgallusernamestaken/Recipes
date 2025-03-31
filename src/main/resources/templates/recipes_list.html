@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes List</title>
+    <link rel="stylesheet" type="text/css" href="/css/list_styles.css">
+</head>
+<body>
+<h1>Recipes List</h1>
+
+<div th:if="${#lists.isEmpty(recipes)}">
+    <p>No recipes found.</p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Recipe Name</th>
+        <th>Category</th>
+        <th>Preparation Time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="recipe : ${recipes}">
+        <td th:text="${recipe.recipeName}"></td>
+        <td th:text="${recipe.recipeCategory}"></td>
+        <td th:text="${recipe.preparationTime}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
