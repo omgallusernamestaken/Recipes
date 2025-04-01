@@ -7,6 +7,8 @@ import com.example.recipes.entities.RecipeTag;
 import com.example.recipes.services.IngredientService;
 import com.example.recipes.services.RecipeService;
 import com.example.recipes.services.RecipeTagService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -14,8 +16,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/recipes")
 @Controller
@@ -75,13 +79,15 @@ public class RecipeController {
     @PostMapping("/add")
     public String addRecipe(@ModelAttribute Recipe recipe,
                             @RequestParam List<Long> recipeTags,
-                            @RequestParam List<Long> ingredientIds,
-                            @RequestParam List<Integer> quantities) {
+                            @RequestParam String ingredientMap) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<Long, Integer> ingredientsMap = objectMapper.readValue(ingredientMap, new TypeReference<Map<Long, Integer>>() {});
 
         List<RecipeTag> selectedTags = recipeTagService.findAllById(recipeTags);
         recipe.setRecipeTags(selectedTags);
 
-        List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientIds, quantities);
+        List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
         recipe.setRecipeIngredients(recipeIngredients);
 
         recipeService.addRecipe(recipe);
@@ -89,12 +95,12 @@ public class RecipeController {
         return "redirect:/recipes/all";
     }
 
-    private List<RecipeIngredient> createRecipeIngredients(Recipe recipe, List<Long> ingredientIds, List<Integer> quantities) {
+    private List<RecipeIngredient> createRecipeIngredients(Recipe recipe, Map<Long, Integer> ingredientsMap) {
         List<RecipeIngredient> recipeIngredients = new ArrayList<>();
 
-        for (int i = 0; i < ingredientIds.size(); i++) {
-            Long ingredientId = ingredientIds.get(i);
-            Integer quantity = quantities.get(i);
+        for (Map.Entry<Long, Integer> entry : ingredientsMap.entrySet()) {
+            Long ingredientId = entry.getKey();
+            Integer quantity = entry.getValue();
 
             Ingredient ingredient = ingredientService.getById(ingredientId).orElseThrow();
             RecipeIngredient recipeIngredient = new RecipeIngredient();

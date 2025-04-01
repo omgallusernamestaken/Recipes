@@ -4,34 +4,37 @@ function addIngredient() {
     const selectedIngredientName = select.options[select.selectedIndex].text;
     const quantity = document.getElementById("ingredientQuantity").value;
 
-    if (!document.getElementById("ingredient-" + selectedIngredientId)) {
+    // Pobierz obecny stan mapy z ukrytego pola (jeśli istnieje)
+    let ingredientMap = JSON.parse(document.getElementById("ingredientMap").value || '{}');
+
+    // Jeśli składnik jeszcze nie jest w mapie, dodaj go
+    if (!ingredientMap[selectedIngredientId]) {
+        ingredientMap[selectedIngredientId] = quantity;
+
+        // Dodaj składnik do listy na stronie
         const li = document.createElement("li");
         li.id = "ingredient-" + selectedIngredientId;
         li.innerHTML = `<span>${selectedIngredientName} - ilość: ${quantity}</span>
                         <button type="button" onclick="removeIngredient(${selectedIngredientId})">x</button>`;
         document.getElementById("selectedIngredients").appendChild(li);
 
-        const inputId = document.createElement("input");
-        inputId.type = "hidden";
-        inputId.name = "ingredientIds";
-        inputId.value = selectedIngredientId;
-        inputId.id = "input-ingredient-" + selectedIngredientId;
-
-        const inputQuantity = document.createElement("input");
-        inputQuantity.type = "hidden";
-        inputQuantity.name = "quantities";
-        inputQuantity.value = quantity;
-        inputQuantity.id = "input-quantity-" + selectedIngredientId;
-
-        document.getElementById("ingredientsContainer").appendChild(inputId);
-        document.getElementById("ingredientsContainer").appendChild(inputQuantity);
+        // Zaktualizuj wartość ukrytego pola z mapą składników
+        document.getElementById("ingredientMap").value = JSON.stringify(ingredientMap);
     }
 }
 
 function removeIngredient(ingredientId) {
+    // Pobierz obecny stan mapy z ukrytego pola (jeśli istnieje)
+    let ingredientMap = JSON.parse(document.getElementById("ingredientMap").value || '{}');
+
+    // Usuń składnik z mapy
+    delete ingredientMap[ingredientId];
+
+    // Usuń element z listy na stronie
     document.getElementById("ingredient-" + ingredientId).remove();
-    document.getElementById("input-ingredient-" + ingredientId).remove();
-    document.getElementById("input-quantity-" + ingredientId).remove();
+
+    // Zaktualizuj wartość ukrytego pola z mapą składników
+    document.getElementById("ingredientMap").value = JSON.stringify(ingredientMap);
 }
 
 function addTag() {

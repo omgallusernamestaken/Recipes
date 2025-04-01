@@ -45,10 +45,7 @@
 
     <!-- Ukryte inputy do wysyłania składników -->
     <div id="ingredientsContainer">
-        <th:block th:each="recipeIngredient : ${recipe.recipeIngredients}">
-            <input type="hidden" name="ingredientIds" th:value="${recipeIngredient.ingredient.id}">
-            <input type="hidden" name="quantities" th:value="${recipeIngredient.quantity}">
-        </th:block>
+        <input type="hidden" name="ingredientMap" id="ingredientMap">
     </div>
 
     <!--    tag-->
