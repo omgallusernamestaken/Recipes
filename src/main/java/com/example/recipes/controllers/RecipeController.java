@@ -2,8 +2,11 @@ package com.example.recipes.controllers;
 
 import com.example.recipes.entities.Ingredient;
 import com.example.recipes.entities.Recipe;
+import com.example.recipes.entities.RecipeIngredient;
+import com.example.recipes.entities.RecipeTag;
 import com.example.recipes.services.IngredientService;
 import com.example.recipes.services.RecipeService;
+import com.example.recipes.services.RecipeTagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/recipes")
@@ -22,6 +26,9 @@ public class RecipeController {
 
     @Autowired
     private IngredientService ingredientService;
+
+    @Autowired
+    private RecipeTagService recipeTagService;
 
     @GetMapping("/all")
     public String getAllRecipes(Model model) {
@@ -58,14 +65,45 @@ public class RecipeController {
     @GetMapping("/add")
     public String showAddRecipeForm(Model model) {
         model.addAttribute("recipe", new Recipe());
+        model.addAttribute("allTags", recipeTagService.findAllTags());
 
+        List<Ingredient> allIngredients = ingredientService.getAllIngredients();
+        model.addAttribute("allIngredients", allIngredients);
         return "recipe_add";
     }
 
     @PostMapping("/add")
-    public String addRecipe(@ModelAttribute Recipe recipe) {
-        System.out.println(recipe);
+    public String addRecipe(@ModelAttribute Recipe recipe,
+                            @RequestParam List<Long> recipeTags,
+                            @RequestParam List<Long> ingredientIds,
+                            @RequestParam List<Integer> quantities) {
+
+        List<RecipeTag> selectedTags = recipeTagService.findAllById(recipeTags);
+        recipe.setRecipeTags(selectedTags);
+
+        List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientIds, quantities);
+        recipe.setRecipeIngredients(recipeIngredients);
+
         recipeService.addRecipe(recipe);
+
         return "redirect:/recipes/all";
+    }
+
+    private List<RecipeIngredient> createRecipeIngredients(Recipe recipe, List<Long> ingredientIds, List<Integer> quantities) {
+        List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+
+        for (int i = 0; i < ingredientIds.size(); i++) {
+            Long ingredientId = ingredientIds.get(i);
+            Integer quantity = quantities.get(i);
+
+            Ingredient ingredient = ingredientService.getById(ingredientId).orElseThrow();
+            RecipeIngredient recipeIngredient = new RecipeIngredient();
+            recipeIngredient.setRecipe(recipe);
+            recipeIngredient.setIngredient(ingredient);
+            recipeIngredient.setQuantity(quantity);
+
+            recipeIngredients.add(recipeIngredient);
+        }
+        return recipeIngredients;
     }
 }

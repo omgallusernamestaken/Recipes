@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,7 +21,12 @@ public class IngredientService {
     }
 
     public List<Ingredient> getAllIngredients() {
-        return ingredientRepository.findAll(Sort.by(Sort.Order.asc("id")));
+        List<Ingredient> ingredients = ingredientRepository.findAll(Sort.by(Sort.Order.asc("id")));
+        return ingredients.isEmpty() ? new ArrayList<>() : ingredients;
+    }
+
+    public List<Ingredient> getAllIngredientsById(List<Long> ingredientsList) {
+        return ingredientRepository.findAllById(ingredientsList);
     }
 
     public void save(Ingredient ingredient) {

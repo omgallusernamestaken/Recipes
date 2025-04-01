@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Add recipe</title>
+    <script src="/js/adding_recipe_script.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -18,9 +19,56 @@
     <label for="recipeDescription">Description:</label>
     <input type="text" id="recipeDescription" th:field="*{recipeDescription}" required>
 
-
 <!--    ingredients-->
-<!--    tags-->
+
+    <label for="ingredientSelect">Składniki:</label>
+    <select id="ingredientSelect">
+        <option th:each="ingredient : ${allIngredients}"
+                th:value="${ingredient.id}"
+                th:text="${ingredient.ingredientName}">
+        </option>
+    </select>
+
+    <label for="ingredientQuantity">Ilość:</label>
+    <input type="number" id="ingredientQuantity" min="1" value="1">
+
+    <button type="button" onclick="addIngredient()">Dodaj składnik</button>
+
+    <ul id="selectedIngredients">
+        <li th:each="recipeIngredient : ${recipe.recipeIngredients}"
+            th:id="'ingredient-' + ${recipeIngredient.ingredient.id}">
+            <span th:text="${recipeIngredient.ingredient.ingredientName}"></span>
+            <span th:text="' - ilość: ' + ${recipeIngredient.quantity}"></span>
+            <button type="button" th:attr="onclick='removeIngredient(' + ${recipeIngredient.ingredient.id} + ')'">X</button>
+        </li>
+    </ul>
+
+    <!-- Ukryte inputy do wysyłania składników -->
+    <div id="ingredientsContainer">
+        <th:block th:each="recipeIngredient : ${recipe.recipeIngredients}">
+            <input type="hidden" name="ingredientIds" th:value="${recipeIngredient.ingredient.id}">
+            <input type="hidden" name="quantities" th:value="${recipeIngredient.quantity}">
+        </th:block>
+    </div>
+
+    <!--    tag-->
+    <label for="tagSelect">Tags:</label>
+    <select id="tagSelect">
+        <option th:each="tag : ${allTags}" th:value="${tag.id}" th:text="${tag.tagName}"></option>
+    </select>
+    <button type="button" onclick="addTag()">Dodaj tag</button>
+
+    <ul id="selectedTags">
+        <li th:each="tag : ${recipe.recipeTags}" th:id="'tag-' + ${tag.id}">
+            <span th:text="${tag.tagName}"></span>
+            <button type="button" th:attr="onclick='removeTag(' + ${tag.id} + ')'">X</button>
+        </li>
+    </ul>
+
+    <!-- Hidden inputs for tag sending -->
+    <div id="tagsContainer">
+        <input type="hidden" th:each="tag : ${recipe.recipeTags}" th:name="recipeTags" th:value="${tag.id}">
+    </div>
 
     <label for="amountOfPortions">Portions:</label>
     <input type="text" id="amountOfPortions" th:field="*{amountOfPortions}" required>
