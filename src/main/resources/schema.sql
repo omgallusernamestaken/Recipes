@@ -30,7 +30,7 @@ CREATE TABLE recipes (
 	recipe_description TEXT,
 	portions_amount INTEGER,
 	preparation_time INTEGER,
-	difficulty VARCHAR(10)
+	difficulty VARCHAR(20)
 );
 
 CREATE TABLE recipe_tags (

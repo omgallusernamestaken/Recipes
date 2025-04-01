@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -57,5 +55,17 @@ public class RecipeController {
         return "recipe_template";
     }
 
+    @GetMapping("/add")
+    public String showAddRecipeForm(Model model) {
+        model.addAttribute("recipe", new Recipe());
 
+        return "recipe_add";
+    }
+
+    @PostMapping("/add")
+    public String addRecipe(@ModelAttribute Recipe recipe) {
+        System.out.println(recipe);
+        recipeService.addRecipe(recipe);
+        return "redirect:/recipes/all";
+    }
 }
