@@ -23,6 +23,7 @@
 
     <label for="ingredientSelect">Składniki:</label>
     <select id="ingredientSelect">
+        <option value="" disabled selected>Wybierz składnik</option>
         <option th:each="ingredient : ${allIngredients}"
                 th:value="${ingredient.id}"
                 th:text="${ingredient.ingredientName}">

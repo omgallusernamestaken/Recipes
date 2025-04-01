@@ -2,7 +2,17 @@ function addIngredient() {
     const select = document.getElementById("ingredientSelect");
     const selectedIngredientId = select.value;
     const selectedIngredientName = select.options[select.selectedIndex].text;
-    const quantity = document.getElementById("ingredientQuantity").value;
+    const quantityInput = document.getElementById("ingredientQuantity");
+    const quantity = quantityInput.value;
+
+    if (selectedIngredientId === "") {
+        return;
+    }
+
+    if (quantity <= 0 || quantity === "") {
+        alert("Ilość składnika musi być większa niż 0!");
+        return;
+    }
 
     // Pobierz obecny stan mapy z ukrytego pola (jeśli istnieje)
     let ingredientMap = JSON.parse(document.getElementById("ingredientMap").value || '{}');
@@ -21,6 +31,8 @@ function addIngredient() {
         // Zaktualizuj wartość ukrytego pola z mapą składników
         document.getElementById("ingredientMap").value = JSON.stringify(ingredientMap);
     }
+
+    quantityInput.value = 1;
 }
 
 function removeIngredient(ingredientId) {
