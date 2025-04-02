@@ -112,7 +112,8 @@ function updateIngredientMap() {
         const ingredientId = li.id.replace("ingredient-", "");
 
         // Pobranie poprawnej ilości składnika z HTML
-        const quantityText = li.querySelector("span").textContent;
+        const ingredientName = li.querySelector("#ingredientName").textContent;
+        const quantityText = li.querySelector("#quantity").textContent;
         const quantityMatch = quantityText.match(/- ilość: (\d+)/);
         const quantity = quantityMatch ? parseInt(quantityMatch[1], 10) : 1;
 

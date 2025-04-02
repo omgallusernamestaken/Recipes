@@ -40,8 +40,8 @@
     <ul id="selectedIngredients">
         <li th:each="recipeIngredient : ${recipe.recipeIngredients}"
             th:id="'ingredient-' + ${recipeIngredient.ingredient.id}">
-            <span th:text="${recipeIngredient.ingredient.ingredientName}"></span>
-            <span th:text="' - ilość: ' + ${recipeIngredient.quantity}"></span>
+            <span id="ingredientName" th:text="${recipeIngredient.ingredient.ingredientName}"></span>
+            <span id="quantity" th:text="' - ilość: ' + ${recipeIngredient.quantity}"></span>
             <button type="button" th:attr="onclick='removeIngredient(' + ${recipeIngredient.ingredient.id} + ')'">X</button>
         </li>
     </ul>
