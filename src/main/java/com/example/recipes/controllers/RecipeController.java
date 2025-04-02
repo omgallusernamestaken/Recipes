@@ -126,4 +126,28 @@ public class RecipeController {
 
         return "recipe_add";
     }
+
+    @PostMapping("/update")
+    public String updateRecipe(@ModelAttribute Recipe recipe,
+                            @RequestParam List<Long> recipeTags,
+                            @RequestParam String ingredientMap) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<Long, Integer> ingredientsMap = objectMapper.readValue(ingredientMap, new TypeReference<Map<Long, Integer>>() {});
+
+        recipeService.removeRecipeIngredients(recipe.getId());
+
+        List<RecipeTag> selectedTags = recipeTagService.findAllById(recipeTags);
+        recipe.setRecipeTags(selectedTags);
+
+        System.out.println("recupe" + recipe.getRecipeIngredients());
+
+        List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
+        recipe.setRecipeIngredients(recipeIngredients);
+
+        System.out.println("recupe2" + recipe.getRecipeIngredients());
+        recipeService.addRecipe(recipe);
+
+        return "redirect:/recipes/all";
+    }
 }
