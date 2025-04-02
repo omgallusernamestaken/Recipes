@@ -117,6 +117,7 @@ public class RecipeController {
     public String showAddRecipeFormForUpdate(@PathVariable long id, Model model) {
         model.addAttribute("recipe", recipeService.getRecipeById(id));
         model.addAttribute("allTags", recipeTagService.findAllTags());
+        model.addAttribute("isEdit", true);
 
         List<Ingredient> allIngredients = ingredientService.getAllIngredients();
         model.addAttribute("allIngredients", allIngredients);
