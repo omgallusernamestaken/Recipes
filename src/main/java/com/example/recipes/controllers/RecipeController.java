@@ -102,8 +102,6 @@ public class RecipeController {
             Long ingredientId = entry.getKey();
             Integer quantity = entry.getValue();
 
-            System.out.println(ingredientId + " ingid");
-
             Ingredient ingredient = ingredientService.getById(ingredientId).orElseThrow();
             RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.setRecipe(recipe);
@@ -140,12 +138,9 @@ public class RecipeController {
         List<RecipeTag> selectedTags = recipeTagService.findAllById(recipeTags);
         recipe.setRecipeTags(selectedTags);
 
-        System.out.println("recupe" + recipe.getRecipeIngredients());
-
         List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
         recipe.setRecipeIngredients(recipeIngredients);
 
-        System.out.println("recupe2" + recipe.getRecipeIngredients());
         recipeService.addRecipe(recipe);
 
         return "redirect:/recipes/all";

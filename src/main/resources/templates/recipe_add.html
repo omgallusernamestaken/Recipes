@@ -10,7 +10,7 @@
 <h1 th:if="${isEdit}">Edit recipe</h1>
 <h1 th:unless="${isEdit}">Add recipe</h1>
 
-<form th:action="@{/recipes/update}" th:object="${recipe}" method="post">
+<form th:action="${isEdit} ? @{/recipes/update} : @{/recipes/add}" th:object="${recipe}" method="post">
     <input type="hidden" th:field="*{id}" />
 
     <label for="recipeName">Recipe name:</label>
