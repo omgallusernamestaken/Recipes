@@ -42,15 +42,14 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Funkcja do usuwania składnika
-    window.removeIngredient = function (ingredientId) {
-        const ingredientElement = document.getElementById("ingredient-" + ingredientId);
-        if (ingredientElement) {
-            ingredientElement.remove();
-        }
+window.removeIngredient = function (ingredientId) {
+    const ingredientElement = document.getElementById("ingredient-" + ingredientId);
+    if (ingredientElement) {
+        ingredientElement.remove();
+    }
 
-        // Zaktualizuj wartość ukrytego pola z mapą składników
-        updateIngredientMap();
-    };
+    updateIngredientMap(); // Zaktualizuj mapę po usunięciu składnika
+};
 
     // Funkcja do dodawania tagu
     window.addTag = function () {
@@ -105,25 +104,26 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Funkcja do aktualizacji ukrytego pola z mapą składników
-    function updateIngredientMap() {
-        const ingredientMap = {};
-        const ingredientItems = selectedIngredientsList.getElementsByTagName("li");
+function updateIngredientMap() {
+    const ingredientMap = {};
+    const ingredientItems = selectedIngredientsList.getElementsByTagName("li");
 
-        Array.from(ingredientItems).forEach(li => {
-            const ingredientId = li.id.replace("ingredient-", "");
-            const quantityText = li.querySelector("span").textContent;
-            const quantityMatch = quantityText.match(/- ilość: (\d+)/);
-            const quantity = quantityMatch ? parseInt(quantityMatch[1], 10) : 1;
+    Array.from(ingredientItems).forEach(li => {
+        const ingredientId = li.id.replace("ingredient-", "");
 
-            ingredientMap[ingredientId] = quantity;
-        });
+        // Pobranie poprawnej ilości składnika z HTML
+        const quantityText = li.querySelector("span").textContent;
+        const quantityMatch = quantityText.match(/- ilość: (\d+)/);
+        const quantity = quantityMatch ? parseInt(quantityMatch[1], 10) : 1;
 
-        // Zaktualizuj ukryte pole dla składników
-        const ingredientInput = document.getElementById("ingredientMap");
-        if (ingredientInput) {
-            ingredientInput.value = JSON.stringify(ingredientMap);
-        }
+        ingredientMap[ingredientId] = quantity;
+    });
+
+    const ingredientInput = document.getElementById("ingredientMap");
+    if (ingredientInput) {
+        ingredientInput.value = JSON.stringify(ingredientMap);
     }
+}
 
     // Funkcja do aktualizacji mapy tagów (jeśli usunięto tagi)
     function updateTagMap() {

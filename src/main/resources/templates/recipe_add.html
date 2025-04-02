@@ -11,7 +11,8 @@
 <h1 th:if="${isEdit}">Edit recipe</h1>
 <h1 th:unless="${isEdit}">Add recipe</h1>
 
-<form th:action="${isEdit} ? @{/recipes/update} : @{/recipes/add}" th:object="${recipe}" method="post">
+<form th:action="${isEdit} ? @{/recipes/update} : @{/recipes/add}" th:object="${recipe}" method="post" onsubmit="beforeSubmit()">
+
     <input type="hidden" th:field="*{id}" />
 
     <label for="recipeName">Recipe name:</label>
@@ -47,7 +48,7 @@
 
     <!-- Ukryte inputy do wysyłania składników -->
     <div id="ingredientsContainer">
-        <input type="hidden" name="ingredientMap" id="ingredientMap">
+        <input type="hidden" name="ingredientMap" id="ingredientMap" value="{}">
     </div>
 
     <!--    tag-->
