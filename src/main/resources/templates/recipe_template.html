@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Recipe</title>
-  <link rel="stylesheet" href="/css/recipe_template_styles.css">
+  <link rel="stylesheet" href="/css/styles.css">
 </head>
 
 <body>
@@ -21,10 +21,19 @@
   <ul th:each="recipeIngredient : ${recipe.recipeIngredients}">
     <li th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + recipeIngredient.ingredient.unit.symbol}"></li>
   </ul>
-
 <br>
+<br>
+<form th:action="@{/recipes/update/{id}(id=${recipe.id})}" method="get">
+  <button type="submit">Edytuj przepis</button>
+</form>
+<br>
+<form th:action="@{/recipes/delete/{id}(id=${recipe.id})}" method="get">
+  <button type="submit" th:onclick="return confirm('Are you sure you want to delete this recipe?'">Usuń przepis</button>
+</form>
+
 <button onclick="window.location.href='/recipes/all'">
   Zobacz wszystkie przepisy
 </button>
+
 </body>
 </html>

@@ -114,7 +114,7 @@ public class RecipeController {
     }
 
     @GetMapping("/update/{id}")
-    public String showAddRecipeFormForUpdate(@PathVariable long id, Model model) {
+    public String showAddRecipeFormForUpdate(@PathVariable("id") long id, Model model) {
         model.addAttribute("recipe", recipeService.getRecipeById(id));
         model.addAttribute("allTags", recipeTagService.findAllTags());
         model.addAttribute("isEdit", true);
@@ -144,6 +144,12 @@ public class RecipeController {
 
         recipeService.addRecipe(recipe);
 
+        return "redirect:/recipes/all";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable long id) {
+        recipeService.delete(id);
         return "redirect:/recipes/all";
     }
 }

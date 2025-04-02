@@ -51,4 +51,9 @@ public class RecipeService {
     public void removeRecipeIngredients(Long recipeId) {
         recipeIngredientRepository.deleteByRecipeId(recipeId);
     }
+
+    public void delete(Long id) {
+        Recipe recipeToDelete = getRecipeById(id);
+        recipesRepository.delete(recipeToDelete);
+    }
 }
