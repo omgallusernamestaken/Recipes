@@ -31,7 +31,7 @@ public class Recipe {
     @Column(name = "recipe_description")
     private String recipeDescription;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<RecipeIngredient> recipeIngredients;
 

@@ -19,7 +19,7 @@
     <label for="recipeDescription">Description:</label>
     <input type="text" id="recipeDescription" th:field="*{recipeDescription}" required>
 
-<!--    ingredients-->
+    <!--    ingredients-->
 
     <label for="ingredientSelect">Składniki:</label>
     <select id="ingredientSelect">
@@ -79,7 +79,8 @@
         <option th:each="difficulty : ${T(com.example.recipes.enums.Difficulty).values()}" th:value="${difficulty}" th:text="${difficulty}"></option>
     </select>
 
-    <button type="submit">Wyślij</button>
+    <button type="submit" th:if="${isEdit}">Dodaj</button>
+    <button type="submit" th:unless="${isEdit}">Zapisz zmiany</button>
 </form>
 
 </body>

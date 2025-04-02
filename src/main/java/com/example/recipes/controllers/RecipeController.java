@@ -102,6 +102,8 @@ public class RecipeController {
             Long ingredientId = entry.getKey();
             Integer quantity = entry.getValue();
 
+            System.out.println(ingredientId + " ingid");
+
             Ingredient ingredient = ingredientService.getById(ingredientId).orElseThrow();
             RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.setRecipe(recipe);
@@ -111,5 +113,17 @@ public class RecipeController {
             recipeIngredients.add(recipeIngredient);
         }
         return recipeIngredients;
+    }
+
+    @GetMapping("/update/{id}")
+    public String showAddRecipeFormForUpdate(@PathVariable long id, Model model) {
+        model.addAttribute("recipe", recipeService.getRecipeById(id));
+        model.addAttribute("allTags", recipeTagService.findAllTags());
+
+        List<Ingredient> allIngredients = ingredientService.getAllIngredients();
+        model.addAttribute("allIngredients", allIngredients);
+
+
+        return "recipe_add";
     }
 }
