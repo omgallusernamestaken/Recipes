@@ -1,67 +1,76 @@
-/* Ogólne ustawienia strony */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #fffaf0; /* Jasny kremowy kolor */
-    color: #4a4a4a;
-    margin: 40px auto;
-    max-width: 800px;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    color: #d2691e; /* Kolor cynamonu */
-    text-align: center;
-}
-
-h2 {
-    color: #8b4513; /* Brązowy */
-    border-bottom: 2px solid #d2691e;
-    padding-bottom: 5px;
-}
-
-p {
-    font-size: 18px;
-    line-height: 1.6;
-}
-
-strong {
-    color: #b22222; /* Czerwony */
-}
-
-/* Lista składników */
-ul {
-    list-style-type: none;
+/* Resetowanie domyślnych stylów */
+* {
+    margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
 }
 
-li {
-    background-color: #ffefd5; /* Jasny brzoskwiniowy */
-    margin: 5px 0;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+body {
+    background-color: #eef8e8;
+    color: #2c3e50;
+    line-height: 1.6;
+    padding: 20px;
 }
 
-/* Przycisk */
-button {
-    display: block;
+h1, h2 {
+    color: #2c5f2d;
+    margin-bottom: 20px;
+    text-align: left;
+    padding-left: 15px;
+}
+
+/* Tabela */
+table {
     width: 100%;
-    padding: 12px;
-    background-color: #ff8c00; /* Pomarańczowy */
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
     margin-top: 20px;
-    transition: background-color 0.3s;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #4caf50;
 }
 
-button:hover {
-    background-color: #e07b00;
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #a5d6a7;
+    text-align: left;
+}
+
+table th {
+    background: #4caf50;
+    color: white;
+}
+
+tr:hover {
+    background: #e8f5e9;
+    cursor: pointer;
+}
+
+/* Przyciski akcji */
+.button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border: none;
+}
+
+.button.edit {
+    background: #43a047;
+    color: white;
+}
+
+.button.delete {
+    background: #e57373;
+    color: white;
+}
+
+.button.edit:hover {
+    background: #388e3c;
+}
+
+.button.delete:hover {
+    background: #c62828;
 }
