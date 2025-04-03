@@ -23,6 +23,9 @@
     <li th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + recipeIngredient.ingredient.unit.symbol}"></li>
   </ul>
 <br>
+<button th:attr="onclick='window.location.href=\'/opinions/recipe/' + ${recipe.id} + '\''">
+  Opinie
+</button>
 <br>
 <button th:attr="onclick='window.location.href=\'/recipes/update/' + ${recipe.id} + '\''">
   Edytuj przepis

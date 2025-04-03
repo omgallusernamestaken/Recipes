@@ -23,12 +23,12 @@ public class OpinionController {
     public String getAllOpinionsForRecipe(@PathVariable long recipeId, Model model) {
         model.addAttribute("opinionsList", opinionService.getAllOpinionByRecipeId(recipeId));
         model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
+        model.addAttribute("recipeId", recipeService.getRecipeById(recipeId).getId());
         return "opinions_list";
     }
 
     @GetMapping("/opinion/{id}")
     public String showOpinion(@PathVariable long id, Model model) {
-        System.out.println("tu");
         model.addAttribute("opinion", opinionService.getOpinionById(id));
         return "opinion_template";
     }

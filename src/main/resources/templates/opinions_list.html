@@ -7,7 +7,7 @@
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
-<h1>Opinions List for <span th:text="${recipeName}"></span></h1>
+<h1>Opinions for <span th:text="${recipeName}"></span></h1>
 
 <div th:if="${#lists.isEmpty(opinionsList)}">
   <p>No opinions found.</p>
@@ -16,18 +16,17 @@
 <table>
   <thead>
   <tr>
-    <th>Author</th>
     <th>Rate</th>
     <th>Description</th>
+    <th>Author</th>
     <th>See full opinion</th>
   </tr>
   </thead>
   <tbody>
   <tr th:each="opinion : ${opinionsList}">
-    <td th:text="${opinion.author}"></td>
     <td th:text="${opinion.rate}"></td>
     <td th:text="${opinion.description}"></td>
-
+    <td th:text="${opinion.author}"></td>
     <td>
       <button th:attr="onclick='window.location.href=\'/opinions/opinion/' + ${opinion.id} + '\''">
         See opinion
@@ -36,5 +35,9 @@
   </tr>
   </tbody>
 </table>
+<br>
+<button th:attr="onclick='window.location.href=\'/recipes/recipe/' + ${recipeId} + '\''">
+  Go back
+</button>
 </body>
 </html>
