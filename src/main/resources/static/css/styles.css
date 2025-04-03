@@ -117,3 +117,59 @@ tr:hover {
 .button.delete:hover {
     background: #c62828;
 }
+/* Składniki – kompaktowy wygląd */
+ul#selectedIngredients {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Odstępy między elementami */
+    max-width: 400px; /* Maksymalna szerokość, żeby nie było na całą linię */
+}
+
+ul#selectedIngredients li {
+    background: #f0f8f0;
+    padding: 8px 12px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Tagi – wyświetlanie w linii */
+ul#selectedTags {
+    list-style-type: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap; /* Zapewnia przechodzenie do nowego wiersza */
+    gap: 5px; /* Odstęp między tagami */
+    max-width: 400px; /* Opcjonalne ograniczenie szerokości */
+}
+
+ul#selectedTags li {
+    background: #c8e6c9;
+    padding: 5px 10px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Odstęp między tekstem a przyciskiem */
+    white-space: nowrap; /* Zapobiega dzieleniu tagów */
+}
+
+/* Styl dla przycisków usuwania */
+ul#selectedIngredients li button,
+ul#selectedTags li button {
+    background: #e57373;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+ul#selectedIngredients li button:hover,
+ul#selectedTags li button:hover {
+    background: #c62828;
+}

@@ -25,7 +25,7 @@
 
     <label for="ingredientSelect">Składniki:</label>
     <select id="ingredientSelect">
-        <option value="" disabled selected>Wybierz składnik</option>
+        <option value="" disabled selected>--Wybierz z listy--</option>
         <option th:each="ingredient : ${allIngredients}"
                 th:value="${ingredient.id}"
                 th:text="${ingredient.ingredientName}">
@@ -54,6 +54,7 @@
     <!--    tag-->
     <label for="tagSelect">Tags:</label>
     <select id="tagSelect">
+        <option value="" disabled selected>--Wybierz z listy--</option>
         <option th:each="tag : ${allTags}" th:value="${tag.id}" th:text="${tag.tagName}"></option>
     </select>
     <button type="button" onclick="addTag()">Dodaj tag</button>
@@ -83,6 +84,9 @@
 
     <button type="submit" th:if="${isEdit}">Dodaj</button>
     <button type="submit" th:unless="${isEdit}">Zapisz zmiany</button>
+    <button onclick="window.location.href='/recipes/all'">
+        Anuluj
+    </button>
 </form>
 
 </body>
