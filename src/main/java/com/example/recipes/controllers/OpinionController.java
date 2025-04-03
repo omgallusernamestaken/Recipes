@@ -1,13 +1,12 @@
 package com.example.recipes.controllers;
 
+import com.example.recipes.entities.Opinion;
 import com.example.recipes.services.OpinionService;
 import com.example.recipes.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/opinions")
@@ -31,5 +30,20 @@ public class OpinionController {
     public String showOpinion(@PathVariable long id, Model model) {
         model.addAttribute("opinion", opinionService.getOpinionById(id));
         return "opinion_template";
+    }
+
+    @GetMapping("/add/{recipeId}")
+    public String showAddOpinionForm(@PathVariable long recipeId, Model model) {
+        model.addAttribute("opinion", new Opinion());
+        model.addAttribute("recipeId", recipeId);
+        model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
+        return "opinion_add";
+    }
+
+    @PostMapping("/add")
+    public String addOpinion(@ModelAttribute Opinion opinion, @RequestParam("recipeId") long recipeId) {
+        opinion.setRecipe(recipeService.getRecipeById(recipeId));
+        opinionService.addOpinion(opinion);
+        return "redirect:/opinions/recipe/" + recipeId;
     }
 }

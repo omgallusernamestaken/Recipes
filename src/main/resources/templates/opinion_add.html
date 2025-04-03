@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add recipe</title>
+  <script src="/js/adding_recipe_script.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+<h1 th:if="${isEdit}">Edit opinion</h1>
+<h1 th:unless="${isEdit}">Add opinion</h1>
+
+<!--<form th:action="${isEdit} ? @{/opinion/update} : @{/opinion/add}" th:object="${opinion}" method="post">-->
+<form th:action="${isEdit} ? @{/opinions/update} : @{/opinions/add}" th:object="${opinion}" method="post">
+
+  <input type="hidden" th:field="*{id}" />
+  <input type="hidden" name="recipeId" th:value="${recipeId}" />
+
+  <label for="rating">Rate recipe:</label>
+  <select id="rating" name="rating">
+    <option value="" disabled selected>--Wybierz z listy--</option>
+    <option th:each="rating : ${T(com.example.recipes.enums.Rating).values()}"
+            th:value="${rating.name()}"
+            th:text="${rating.stars}"
+            th:selected="${opinion.rating != null and opinion.rating.name() == rating.name()}">
+    </option>
+  </select>
+
+  <label for="description">Type in your opinion:</label>
+  <input type="text" id="description" th:field="*{description}" required>
+
+  <label for="author">Author:</label>
+  <input type="text" id="author" th:field="*{author}" required>
+
+  <p><strong>On recipe:</strong> <span th:text="${recipeName}"></span></p>
+
+  <button type="submit" th:if="${isEdit}">Dodaj</button>
+  <button type="submit" th:unless="${isEdit}">Zapisz zmiany</button>
+
+</form>
+
+</body>
+</html>

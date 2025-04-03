@@ -26,6 +26,9 @@
 <button th:attr="onclick='window.location.href=\'/opinions/recipe/' + ${recipe.id} + '\''">
   Opinie
 </button>
+<button th:attr="onclick='window.location.href=\'/opinions/add/' + ${recipe.id} + '\''">
+  Dodaj opinie
+</button>
 <br>
 <button th:attr="onclick='window.location.href=\'/recipes/update/' + ${recipe.id} + '\''">
   Edytuj przepis

@@ -24,4 +24,8 @@ public class OpinionService {
     public List<Opinion> getAllOpinionByRecipeId(long recipeId) {
         return opinionRepository.getAllOpinionsByRecipeId(recipeId);
     }
+
+    public void addOpinion(Opinion opinion) {
+        opinionRepository.save(opinion);
+    }
 }
