@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ingredients List</title>
-    <link rel="stylesheet" type="text/css" href="/css/recipe_template_styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 <h1>Ingredients List</h1>
@@ -28,15 +28,12 @@
         <td th:text="${ingredient.kcalIn100g}"></td>
         <td th:text="${ingredient.category.categoryName}"></td>
         <td>
-            <!-- Przycisk do edycji -->
-            <form th:action="@{/ingredients/edit/{id}(id=${ingredient.id})}" method="get" style="display:inline;">
-                <button type="submit" class="button edit">Edit</button>
-            </form>
-
-            <!-- Przycisk do usuwania -->
-            <form th:action="@{/ingredients/delete/{id}(id=${ingredient.id})}" style="display:inline;">
-                <button type="submit" class="button delete" th:onclick="return confirm('Are you sure you want to delete this ingredient?')">Delete</button>
-            </form>
+            <button th:attr="onclick='window.location.href=\'/ingredients/edit/' + ${ingredient.id} + '\''">
+                Edit
+            </button>
+            <button th:attr="onclick='window.location.href=\'/ingredients/delete/' + ${ingredient.id} + '\''">
+                Delete
+            </button>
         </td>
     </tr>
     </tbody>
