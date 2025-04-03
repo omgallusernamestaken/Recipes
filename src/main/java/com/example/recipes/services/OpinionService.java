@@ -28,4 +28,8 @@ public class OpinionService {
     public void addOpinion(Opinion opinion) {
         opinionRepository.save(opinion);
     }
+
+    public void deleteOpinionById(long id) {
+        opinionRepository.delete(getOpinionById(id));
+    }
 }

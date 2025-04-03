@@ -46,4 +46,20 @@ public class OpinionController {
         opinionService.addOpinion(opinion);
         return "redirect:/opinions/recipe/" + recipeId;
     }
+
+    @GetMapping("/edit/{id}")
+    public String showEditOpinionForm(@PathVariable long id, Model model) {
+        Opinion editedOpinion = opinionService.getOpinionById(id);
+        long recipeId = editedOpinion.getRecipe().getId();
+        model.addAttribute("opinion", editedOpinion);
+        model.addAttribute("recipeId", recipeId);
+        model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
+        return "opinion_add";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteOpinion(@PathVariable long id, @RequestParam("recipeId") String recipeId) {
+        opinionService.deleteOpinionById(id);
+        return "redirect:/opinions/recipe/" +recipeId;
+    }
 }

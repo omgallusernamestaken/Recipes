@@ -12,7 +12,7 @@
 <h1 th:unless="${isEdit}">Add opinion</h1>
 
 <!--<form th:action="${isEdit} ? @{/opinion/update} : @{/opinion/add}" th:object="${opinion}" method="post">-->
-<form th:action="${isEdit} ? @{/opinions/update} : @{/opinions/add}" th:object="${opinion}" method="post">
+<form th:action="@{/opinions/add}" th:object="${opinion}" method="post">
 
   <input type="hidden" th:field="*{id}" />
   <input type="hidden" name="recipeId" th:value="${recipeId}" />

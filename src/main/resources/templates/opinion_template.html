@@ -15,6 +15,14 @@
 
 
 <br>
+<button th:attr="onclick='window.location.href=\'/opinions/edit/' + ${opinion.recipe.id} + '\''">
+  Edytuj
+</button>
+<br>
+<button th:attr="onclick='window.location.href=\'/opinions/delete/' + ${opinion.id} + '?recipeId=' + ${opinion.recipe.id} + '\''">
+  Usuń
+</button>
+
 <br>
 <button th:attr="onclick='window.location.href=\'/opinions/recipe/' + ${opinion.recipe.id} + '\''">
   Wróć do listy
