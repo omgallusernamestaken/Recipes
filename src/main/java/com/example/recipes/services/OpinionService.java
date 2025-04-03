@@ -20,4 +20,8 @@ public class OpinionService {
     public List<Opinion> getAll() {
         return opinionRepository.findAll();
     }
+
+    public List<Opinion> getAllOpinionByRecipeId(long recipeId) {
+        return opinionRepository.getAllOpinionsByRecipeId(recipeId);
+    }
 }

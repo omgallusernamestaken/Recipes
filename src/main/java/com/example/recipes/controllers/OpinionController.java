@@ -1,6 +1,7 @@
 package com.example.recipes.controllers;
 
 import com.example.recipes.services.OpinionService;
+import com.example.recipes.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,9 +16,14 @@ public class OpinionController {
     @Autowired
     private OpinionService opinionService;
 
-    public String getAllOpinions() {
+    @Autowired
+    private RecipeService recipeService;
 
-        return "";
+    @GetMapping("/recipe/{recipeId}")
+    public String getAllOpinionsForRecipe(@PathVariable long recipeId, Model model) {
+        model.addAttribute("opinionsList", opinionService.getAllOpinionByRecipeId(recipeId));
+        model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
+        return "opinions_list";
     }
 
     @GetMapping("/opinion/{id}")
