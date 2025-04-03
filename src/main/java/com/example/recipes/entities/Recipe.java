@@ -45,10 +45,8 @@ public class Recipe {
     @Column(name = "portions_amount")
     private int amountOfPortions;
 
-    //TODO later
-    // remember to update setters, getters, toString, hashcode, equals, thymeleaf
-    //TODO: change into Opinion Object
-    //private List<String> opinions;
+    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Opinion> opinions;
 
     @Column(name = "preparation_time")
     private int preparationTime;

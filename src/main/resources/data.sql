@@ -57,3 +57,22 @@ INSERT INTO recipe_tags (recipe_id, tag_id) VALUES
 (4, 1), -- Owsianka z jabłkiem - wegetariańskie
 (4, 3), -- Owsianka z jabłkiem - szybkie
 (5, 4); -- Stek wołowy - obiad
+
+-- Opinie dla przepisu o ID 1
+INSERT INTO opinions (opinion_rate, opinion_author, opinion_description, recipe_id)
+VALUES
+(5, 'Anna Kowalska', 'Bardzo smaczny przepis! Wszyscy w rodzinie go pokochali.', 1),
+(4, 'Marek Nowak', 'Dobrze smakuje, ale można by dodać więcej przypraw.', 1),
+(3, 'Katarzyna Wójcik', 'Trochę za mało aromatyczny, ale ok.', 1),
+(4, 'Janusz Kwiatkowski', 'Świetne danie, jednak czas gotowania mógłby być krótszy.', 2),
+(5, 'Ewa Zielińska', 'Pyszne i szybkie w przygotowaniu! Polecam.', 2),
+(2, 'Piotr Szymański', 'Niestety, nie przypadło mi do gustu. Zbyt mało smaku.', 2),
+(3, 'Magdalena Bąk', 'Danie nieźle smakuje, ale trochę za tłuste.', 3),
+(5, 'Paweł Mazur', 'Rewelacyjne! To moje nowe ulubione danie.', 3),
+(4, 'Lidia Król', 'Dobre, ale można by dodać więcej warzyw.', 3),
+(2, 'Tomasz Dąbrowski', 'Niestety, nie udało mi się zrobić tego dania poprawnie. Trochę zbyt trudne.', 4),
+(4, 'Zofia Pawlak', 'Pyszne, ale wymaga odrobiny wprawy.', 4),
+(5, 'Kamil Kaczmarek', 'Doskonałe! Idealne na szybki obiad.', 4),
+(3, 'Anna Lewandowska', 'Danie smaczne, ale spodziewałam się czegoś bardziej wyrazistego.', 5),
+(5, 'Krzysztof Nowak', 'Idealne! Moje dzieci je uwielbiają.', 5),
+(4, 'Agata Wiśniewska', 'Bardzo smaczne, choć trochę za słodkie dla mnie.', 5);

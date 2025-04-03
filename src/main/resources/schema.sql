@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS recipe_ingredients;
 DROP TABLE IF EXISTS recipe_tags;
+DROP TABLE IF EXISTS opinions;
 DROP TABLE IF EXISTS recipes;
 DROP TABLE IF EXISTS ingredients;
 DROP TABLE IF EXISTS tags;
@@ -49,3 +50,12 @@ CREATE TABLE recipe_ingredients (
     FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id) ON DELETE CASCADE,
     FOREIGN KEY (ingredient_id) REFERENCES ingredients(ingredient_id) ON DELETE CASCADE
 );
+
+CREATE TABLE opinions (
+    opinion_id SERIAL PRIMARY KEY,
+    opinion_rate INT NOT NULL,
+    opinion_author VARCHAR(50) NOT NULL,
+    opinion_description TEXT,
+    recipe_id BIGINT NOT NULL,
+    FOREIGN KEY (recipe_id) REFERENCES recipes(recipe_id)
+)
