@@ -1,5 +1,6 @@
 package com.example.recipes.entities;
 
+import com.example.recipes.enums.Rating;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,8 @@ public class Opinion {
     private long id;
 
     @Column(name = "opinion_rate")
-    private int rate;
+    @Enumerated(EnumType.STRING)
+    private Rating rating;
 
     @Column(name = "opinion_author")
     private String author;

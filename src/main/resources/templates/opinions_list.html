@@ -24,7 +24,7 @@
   </thead>
   <tbody>
   <tr th:each="opinion : ${opinionsList}">
-    <td th:text="${opinion.rate}"></td>
+    <td th:text="${opinion.rating.stars}"></td>
     <td th:text="${opinion.description}"></td>
     <td th:text="${opinion.author}"></td>
     <td>

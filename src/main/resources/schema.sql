@@ -53,7 +53,7 @@ CREATE TABLE recipe_ingredients (
 
 CREATE TABLE opinions (
     opinion_id SERIAL PRIMARY KEY,
-    opinion_rate INT NOT NULL,
+    opinion_rate VARCHAR(20) NOT NULL,
     opinion_author VARCHAR(50) NOT NULL,
     opinion_description TEXT,
     recipe_id BIGINT NOT NULL,

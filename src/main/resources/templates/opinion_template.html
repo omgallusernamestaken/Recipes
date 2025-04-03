@@ -10,7 +10,7 @@
 <input type="hidden" id="opinionId" th:value="${opinion.id}">
 <p><strong>Author:</strong> <span th:text="${opinion.author}"></span></p>
 <p><strong>Opinion on recipe:</strong> <span th:text="${opinion.recipe.recipeName}"></span></p>
-<p><strong>Rate:</strong> <span th:text="${opinion.rate}"></span></p>
+<p><strong>Rate:</strong> <span th:text="${opinion.rating.stars}"></span></p>
 <p><strong>Description:</strong> <span th:text="${opinion.description}"></span></p>
 
 
