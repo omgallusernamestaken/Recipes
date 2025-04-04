@@ -17,11 +17,11 @@ public class OpinionService {
         return opinionRepository.findById(id).get();
     }
 
-    public List<Opinion> getAll() {
+    public List<Opinion> getAllOpinions() {
         return opinionRepository.findAll();
     }
 
-    public List<Opinion> getAllOpinionByRecipeId(long recipeId) {
+    public List<Opinion> getAllOpinionForRecipeByRecipeId(long recipeId) {
         return opinionRepository.getAllOpinionsByRecipeId(recipeId);
     }
 

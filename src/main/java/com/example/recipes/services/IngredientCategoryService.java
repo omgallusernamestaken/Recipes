@@ -13,7 +13,7 @@ public class IngredientCategoryService {
     @Autowired
     private IngredientCategoryRepository ingredientCategoryRepository;
 
-    public List<IngredientCategory> findAll() {
+    public List<IngredientCategory> getAllIngredientsCategories() {
         return ingredientCategoryRepository.findAll();
     }
 

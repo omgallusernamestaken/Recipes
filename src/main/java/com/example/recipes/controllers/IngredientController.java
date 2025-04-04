@@ -31,22 +31,22 @@ public class IngredientController {
     @GetMapping("/add")
     public String showAddIngredientForm(Model model) {
         model.addAttribute("ingredient", new Ingredient());
-        model.addAttribute("categories", ingredientCategoryService.findAll());
+        model.addAttribute("categories", ingredientCategoryService.getAllIngredientsCategories());
         model.addAttribute("units", Unit.values());
         return "ingredient/ingredient_add";
     }
 
     @PostMapping("add")
     public String addIngredient(@ModelAttribute Ingredient ingredient) {
-        ingredientService.save(ingredient);
+        ingredientService.saveIngredient(ingredient);
         return "redirect:/ingredients/all";
     }
 
     @GetMapping("/edit/{id}")
     public String editIngredient(@PathVariable Long id, Model model) {
-        Ingredient ingredient = ingredientService.getById(id).get();
+        Ingredient ingredient = ingredientService.getIngredientById(id).get();
         model.addAttribute("ingredient", ingredient);
-        model.addAttribute("categories", ingredientCategoryService.findAll());
+        model.addAttribute("categories", ingredientCategoryService.getAllIngredientsCategories());
         model.addAttribute("isEdit", true);
         model.addAttribute("id", ingredient.getId());
         return "ingredient/ingredient_add";
@@ -54,13 +54,13 @@ public class IngredientController {
 
     @PostMapping("/edit")
     public String editIngredient(@ModelAttribute Ingredient ingredient) {
-        ingredientService.update(ingredient);
+        ingredientService.updateIngredient(ingredient);
         return "redirect:/ingredients/all";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteIngredient(@PathVariable Long id) {
-        ingredientService.deleteById(id);
+        ingredientService.deleteIngredientById(id);
         return "redirect:/ingredients/all";
     }
 }

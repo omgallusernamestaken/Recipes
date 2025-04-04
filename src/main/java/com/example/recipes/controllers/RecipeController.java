@@ -55,7 +55,7 @@ public class RecipeController {
     //TODO fix case sensitivity
     @GetMapping("/ingredients/{ingredientName}")
     public String getRecipesWithIngredient(@PathVariable String ingredientName, Model model) {
-        Ingredient ingredient = ingredientService.getByName(ingredientName)
+        Ingredient ingredient = ingredientService.getIngredientByName(ingredientName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ingredient not found"));
 
         List<Recipe> recipeList = recipeService.getRecipesWithIngredient(ingredient);
@@ -88,7 +88,7 @@ public class RecipeController {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<Long, Integer> ingredientsMap = objectMapper.readValue(ingredientMap, new TypeReference<Map<Long, Integer>>() {});
 
-        List<RecipeTag> selectedTags = recipeTagService.findAllById(recipeTags);
+        List<RecipeTag> selectedTags = recipeTagService.findAllByIdsList(recipeTags);
         recipe.setRecipeTags(selectedTags);
 
         List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
@@ -106,7 +106,7 @@ public class RecipeController {
             Long ingredientId = entry.getKey();
             Integer quantity = entry.getValue();
 
-            Ingredient ingredient = ingredientService.getById(ingredientId).orElseThrow();
+            Ingredient ingredient = ingredientService.getIngredientById(ingredientId).orElseThrow();
             RecipeIngredient recipeIngredient = new RecipeIngredient();
             recipeIngredient.setRecipe(recipe);
             recipeIngredient.setIngredient(ingredient);
@@ -140,7 +140,7 @@ public class RecipeController {
 
         recipeService.removeRecipeIngredients(recipe.getId());
 
-        List<RecipeTag> selectedTags = recipeTagService.findAllById(recipeTags);
+        List<RecipeTag> selectedTags = recipeTagService.findAllByIdsList(recipeTags);
         recipe.setRecipeTags(selectedTags);
 
         List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
@@ -153,7 +153,7 @@ public class RecipeController {
 
     @GetMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable long id) {
-        recipeService.delete(id);
+        recipeService.deleteRecipeById(id);
         return "redirect:/recipes/all";
     }
 }

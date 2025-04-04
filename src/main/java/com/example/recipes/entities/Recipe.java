@@ -70,4 +70,15 @@ public class Recipe {
     public int hashCode() {
         return Objects.hash(id, recipeName, recipeDescription, recipeIngredients, recipeTags, amountOfPortions, preparationTime, difficulty);
     }
+
+    public double calculateAvgRating(List<Opinion> opinions) {
+        if (opinions.isEmpty()) {
+            return 0.0;
+        }
+        double sum = opinions.stream()
+                .mapToInt(opinion -> opinion.getRating().getValue())
+                .sum();
+
+        return sum/ opinions.size();
+    }
 }

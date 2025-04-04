@@ -16,7 +16,11 @@ public class IngredientService {
     @Autowired
     private IngredientRepository ingredientRepository;
 
-    public Optional<Ingredient> getByName(String ingredientName) {
+    public Optional<Ingredient> getIngredientById(Long id) {
+        return ingredientRepository.findById(id);
+    }
+
+    public Optional<Ingredient> getIngredientByName(String ingredientName) {
         return ingredientRepository.findByIngredientName(ingredientName);
     }
 
@@ -25,23 +29,19 @@ public class IngredientService {
         return ingredients.isEmpty() ? new ArrayList<>() : ingredients;
     }
 
-    public List<Ingredient> getAllIngredientsById(List<Long> ingredientsList) {
+    public List<Ingredient> getAllIngredientsByIdsList(List<Long> ingredientsList) {
         return ingredientRepository.findAllById(ingredientsList);
     }
 
-    public void save(Ingredient ingredient) {
+    public void saveIngredient(Ingredient ingredient) {
         ingredientRepository.save(ingredient);
     }
 
-    public Optional<Ingredient> getById(Long id) {
-        return ingredientRepository.findById(id);
-    }
-
-    public void update(Ingredient ingredient) {
+    public void updateIngredient(Ingredient ingredient) {
         ingredientRepository.save(ingredient);
     }
 
-    public void deleteById(Long id) {
+    public void deleteIngredientById(Long id) {
         ingredientRepository.deleteById(id);
     }
 }

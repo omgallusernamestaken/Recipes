@@ -21,7 +21,7 @@ public class OpinionController {
 
     @GetMapping("/recipe/{recipeId}")
     public String getAllOpinionsForRecipe(@PathVariable long recipeId, Model model) {
-        model.addAttribute("opinionsList", opinionService.getAllOpinionByRecipeId(recipeId));
+        model.addAttribute("opinionsList", opinionService.getAllOpinionForRecipeByRecipeId(recipeId));
         model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
         model.addAttribute("recipeId", recipeService.getRecipeById(recipeId).getId());
         return "opinion/opinions_list";

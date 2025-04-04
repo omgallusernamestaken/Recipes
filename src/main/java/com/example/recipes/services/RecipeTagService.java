@@ -17,7 +17,7 @@ public class RecipeTagService {
         return recipeTagRepository.findAll();
     }
 
-    public List<RecipeTag> findAllById(List<Long> recipeTags) {
+    public List<RecipeTag> findAllByIdsList(List<Long> recipeTags) {
         return recipeTagRepository.findAllById(recipeTags);
     }
 }

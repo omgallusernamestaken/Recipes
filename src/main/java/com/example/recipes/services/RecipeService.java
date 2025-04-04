@@ -1,7 +1,6 @@
 package com.example.recipes.services;
 
 import com.example.recipes.entities.Ingredient;
-import com.example.recipes.entities.Opinion;
 import com.example.recipes.entities.Recipe;
 import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.repositories.RecipeIngredientRepository;
@@ -60,26 +59,15 @@ public class RecipeService {
         recipeIngredientRepository.deleteByRecipeId(recipeId);
     }
 
-    public void delete(Long id) {
+    public void deleteRecipeById(Long id) {
         Recipe recipeToDelete = getRecipeById(id);
         recipesRepository.delete(recipeToDelete);
     }
 
     public void updateRatingForRecipe(long recipeId) {
         Recipe recipe = getRecipeById(recipeId);
-        double newRating = calculateAvgRating(recipe.getOpinions());
+        double newRating = recipe.calculateAvgRating(recipe.getOpinions());
         recipe.setAvgRating(newRating);
         recipesRepository.save(recipe);
-    }
-
-    private double calculateAvgRating(List<Opinion> opinions) {
-        if (opinions.isEmpty()) {
-            return 0.0;
-        }
-        double sum = opinions.stream()
-                .mapToInt(opinion -> opinion.getRating().getValue())
-                .sum();
-
-        return sum/ opinions.size();
     }
 }
