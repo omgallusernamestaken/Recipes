@@ -25,7 +25,7 @@ public class IngredientController {
     public String getAllIngredients(Model model) {
         List<Ingredient> listOfIngredients = ingredientService.getAllIngredients();
         model.addAttribute("ingredients", listOfIngredients);
-        return "ingredients_list";
+        return "ingredient/ingredients_list";
     }
 
     @GetMapping("/add")
@@ -33,7 +33,7 @@ public class IngredientController {
         model.addAttribute("ingredient", new Ingredient());
         model.addAttribute("categories", ingredientCategoryService.findAll());
         model.addAttribute("units", Unit.values());
-        return "ingredient_add";
+        return "ingredient/ingredient_add";
     }
 
     @PostMapping("add")
@@ -49,7 +49,7 @@ public class IngredientController {
         model.addAttribute("categories", ingredientCategoryService.findAll());
         model.addAttribute("isEdit", true);
         model.addAttribute("id", ingredient.getId());
-        return "ingredient_add";
+        return "ingredient/ingredient_add";
     }
 
     @PostMapping("/edit")

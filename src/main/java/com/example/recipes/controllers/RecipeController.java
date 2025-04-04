@@ -42,7 +42,7 @@ public class RecipeController {
     public String getAllRecipes(Model model) {
         List<Recipe> recipeList = recipeService.getAllRecipes();
         model.addAttribute("recipes", recipeList);
-        return "recipes_list";
+        return "recipe/recipes_list";
     }
 
     @GetMapping("/recipebyname/{namePart}")
@@ -60,14 +60,14 @@ public class RecipeController {
 
         List<Recipe> recipeList = recipeService.getRecipesWithIngredient(ingredient);
         model.addAttribute("recipes", recipeList);
-        return "recipes_list";
+        return "recipe/recipes_list";
     }
 
     @GetMapping("/recipe/{id}")
     public String getRecipeById(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
         model.addAttribute("recipe", recipe);
-        return "recipe_template";
+        return "recipe/recipe_template";
     }
 
     @GetMapping("/add")
@@ -77,7 +77,7 @@ public class RecipeController {
 
         List<Ingredient> allIngredients = ingredientService.getAllIngredients();
         model.addAttribute("allIngredients", allIngredients);
-        return "recipe_add";
+        return "recipe/recipe_add";
     }
 
     @PostMapping("/add")
@@ -127,7 +127,7 @@ public class RecipeController {
         model.addAttribute("allIngredients", allIngredients);
 
 
-        return "recipe_add";
+        return "recipe/recipe_add";
     }
 
     @PostMapping("/update")

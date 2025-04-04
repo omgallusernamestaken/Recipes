@@ -24,13 +24,13 @@ public class OpinionController {
         model.addAttribute("opinionsList", opinionService.getAllOpinionByRecipeId(recipeId));
         model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
         model.addAttribute("recipeId", recipeService.getRecipeById(recipeId).getId());
-        return "opinions_list";
+        return "opinion/opinions_list";
     }
 
     @GetMapping("/opinion/{id}")
     public String showOpinion(@PathVariable long id, Model model) {
         model.addAttribute("opinion", opinionService.getOpinionById(id));
-        return "opinion_template";
+        return "opinion/opinion_template";
     }
 
     @GetMapping("/add/{recipeId}")
@@ -38,7 +38,7 @@ public class OpinionController {
         model.addAttribute("opinion", new Opinion());
         model.addAttribute("recipeId", recipeId);
         model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
-        return "opinion_add";
+        return "opinion/opinion_add";
     }
 
     @PostMapping("/add")
@@ -57,7 +57,7 @@ public class OpinionController {
         model.addAttribute("opinion", editedOpinion);
         model.addAttribute("recipeId", recipeId);
         model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
-        return "opinion_add";
+        return "opinion/opinion_add";
     }
 
     @GetMapping("/delete/{id}")
