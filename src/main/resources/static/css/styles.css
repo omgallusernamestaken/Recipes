@@ -174,16 +174,16 @@ ul#selectedTags li button:hover {
     background: #c62828;
 }
 
-.stars::before {
-    content: "★★★★★";
-    letter-spacing: 3px;
-    background: linear-gradient(90deg, gold var(--rating), gray var(--rating));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
-.stars[data-rating="5"] { --rating: 100%; }
-.stars[data-rating="4"] { --rating: 80%; }
-.stars[data-rating="3"] { --rating: 60%; }
-.stars[data-rating="2"] { --rating: 40%; }
-.stars[data-rating="1"] { --rating: 20%; }
+    .star {
+      color: gold; /* Wypełnienie */
+      text-shadow:
+        -1px -1px 0 #000,
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000; /* Obramowanie */
+    }
+
+    .star-empty {
+      color: lightgray;
+    }

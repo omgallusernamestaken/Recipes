@@ -32,4 +32,15 @@ public class OpinionService {
     public void deleteOpinionById(long id) {
         opinionRepository.delete(getOpinionById(id));
     }
+
+    public double calculateAvgRating(List<Opinion> opinions) {
+        if (opinions.isEmpty()) {
+            return 0.0;
+        }
+        double sum = opinions.stream()
+                .mapToInt(opinion -> opinion.getRating().getValue())
+                .sum();
+
+        return sum/ opinions.size();
+    }
 }

@@ -55,6 +55,9 @@ public class Recipe {
     @Enumerated(EnumType.STRING)
     private Difficulty difficulty;
 
+    @Column(name = "avg_rating")
+    private double avgRating;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

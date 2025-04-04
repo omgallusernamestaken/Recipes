@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipes List</title>
-    <link rel="stylesheet" type="text/css" href="/css/recipe_template_styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 <h1>Recipes List</h1>
@@ -17,6 +18,7 @@
     <thead>
     <tr>
         <th>Recipe Name</th>
+        <th>Avg rating</th>
         <th>Preparation Time</th>
         <th>Difficulty</th>
     </tr>
@@ -25,6 +27,14 @@
     <tr th:each="recipe : ${recipes}" th:attr="onclick='window.location.href=\'/recipes/recipe/' + ${recipe.id} + '\''"
         style="cursor: pointer;">
         <td th:text="${recipe.recipeName}"></td>
+        <td>
+            <span th:with="ratingVal=${recipe.avgRating}">
+            <span th:each="i : ${#numbers.sequence(1, 5)}">
+                <i th:if="${i <= ratingVal}" class="fa-solid fa-star star"></i>
+                <i th:if="${i > ratingVal && i - 0.5 != ratingVal}" class="fa-regular fa-star star-empty"></i>
+            </span>
+            </span>
+        </td>
         <td th:text="${recipe.preparationTime}"></td>
         <td th:text="${recipe.difficulty.symbol}"></td>
     </tr>

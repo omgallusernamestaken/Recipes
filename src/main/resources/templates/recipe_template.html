@@ -4,12 +4,24 @@
   <meta charset="UTF-8">
   <title>Recipe</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 <input type="hidden" id="recipeId" th:value="${recipe.id}">
 <h1 th:text="${recipe.recipeName}"></h1>
 <p><strong>Description:</strong> <span th:text="${recipe.recipeDescription}"></span></p>
+
+<p><strong>Avg rating: </strong> <span th:text="${recipe.avgRating}"></span>
+<span th:with="ratingVal=${recipe.avgRating}">
+    <span th:each="i : ${#numbers.sequence(1, 5)}">
+      <i th:if="${i <= ratingVal}" class="fa-solid fa-star star"></i>
+      <i th:if="${i > ratingVal && i - 0.5 != ratingVal}" class="fa-regular fa-star star-empty"></i>
+    </span>
+  </span>
+</p>
+
 <p><strong>Portions amount:</strong> <span th:text="${recipe.amountOfPortions}"></span></p>
 <p><strong>Cooking time:</strong> <span th:text="${recipe.preparationTime}"></span> minut</p>
 <p><strong>Difficulty:</strong> <span th:text="${recipe.difficulty.symbol}"></span></p>

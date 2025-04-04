@@ -5,6 +5,7 @@ import com.example.recipes.entities.Recipe;
 import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.entities.RecipeTag;
 import com.example.recipes.services.IngredientService;
+import com.example.recipes.services.OpinionService;
 import com.example.recipes.services.RecipeService;
 import com.example.recipes.services.RecipeTagService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -33,6 +34,9 @@ public class RecipeController {
 
     @Autowired
     private RecipeTagService recipeTagService;
+
+    @Autowired
+    private OpinionService opinionService;
 
     @GetMapping("/all")
     public String getAllRecipes(Model model) {

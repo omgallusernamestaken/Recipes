@@ -31,7 +31,8 @@ CREATE TABLE recipes (
 	recipe_description TEXT,
 	portions_amount INTEGER,
 	preparation_time INTEGER,
-	difficulty VARCHAR(20)
+	difficulty VARCHAR(20),
+	avg_rating NUMERIC(3,2)
 );
 
 CREATE TABLE recipe_tags (
