@@ -175,15 +175,43 @@ ul#selectedTags li button:hover {
 }
 
 
-    .star {
-      color: gold; /* Wypełnienie */
-      text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000; /* Obramowanie */
-    }
+.star {
+   color: gold; /* Wypełnienie */
+   text-shadow:
+   -1px -1px 0 #000,
+   1px -1px 0 #000,
+   -1px 1px 0 #000,
+   1px 1px 0 #000; /* Obramowanie */
+}
 
-    .star-empty {
-      color: lightgray;
-    }
+.star-empty {
+   color: lightgray;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse; /* Gwiazdki odwrócone, aby pierwsza była po lewej */
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.star-rating input {
+    display: none; /* Ukrywamy radio */
+}
+
+.star-rating label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+}
+
+/* Podświetlanie gwiazdek na hover */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: gold;
+}
+
+/* Podświetlanie wybranej oceny i wszystkich wcześniejszych gwiazdek */
+.star-rating input:checked ~ label {
+    color: gold;
+}

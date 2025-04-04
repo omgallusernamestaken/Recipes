@@ -18,14 +18,23 @@
   <input type="hidden" name="recipeId" th:value="${recipeId}" />
 
   <label for="rating">Rate recipe:</label>
-  <select id="rating" name="rating">
-    <option value="" disabled selected>--Wybierz z listy--</option>
-    <option th:each="rating : ${T(com.example.recipes.enums.Rating).values()}"
-            th:value="${rating.name()}"
-            th:text="${rating.stars}"
-            th:selected="${opinion.rating != null and opinion.rating.name() == rating.name()}">
-    </option>
-  </select>
+  <div id="rating" class="star-rating">
+    <input type="radio" id="star5" name="rating" value="FIVE_STARS" th:checked="${opinion.rating?.name() == 'FIVE_STARS'}" />
+    <label for="star5">&#9733;</label>
+
+    <input type="radio" id="star4" name="rating" value="FOUR_STARS" th:checked="${opinion.rating?.name() == 'FOUR_STARS'}" />
+    <label for="star4">&#9733;</label>
+
+    <input type="radio" id="star3" name="rating" value="THREE_STARS" th:checked="${opinion.rating?.name() == 'THREE_STARS'}" />
+    <label for="star3">&#9733;</label>
+
+    <input type="radio" id="star2" name="rating" value="TWO_STARS" th:checked="${opinion.rating?.name() == 'TWO_STARS'}" />
+    <label for="star2">&#9733;</label>
+
+    <input type="radio" id="star1" name="rating" value="ONE_STAR" th:checked="${opinion.rating?.name() == 'ONE_STAR'}" />
+    <label for="star1">&#9733;</label>
+  </div>
+
 
   <label for="description">Type in your opinion:</label>
   <input type="text" id="description" th:field="*{description}" required>
