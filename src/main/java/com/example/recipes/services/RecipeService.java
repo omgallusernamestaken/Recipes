@@ -6,8 +6,10 @@ import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.repositories.RecipeIngredientRepository;
 import com.example.recipes.repositories.RecipesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +26,9 @@ public class RecipeService {
     @Autowired
     private OpinionService opinionService;
 
+    @Autowired
+    private IngredientService ingredientService;
+
     public List<Recipe> getAllRecipes() {
         return recipesRepository.findAll();
     }
@@ -34,7 +39,14 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
-    public List<Recipe> getRecipesWithIngredient(Ingredient ingredient) {
+    public List<Recipe> getRecipesWithIngredientName(String ingredientName) {
+        String lowerCaseName = ingredientName.toLowerCase();
+
+        Ingredient ingredient = ingredientService.getAllIngredients().stream()
+                .filter(i -> i.getIngredientName().equalsIgnoreCase(lowerCaseName))
+                .findFirst()
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ingredient not found"));
+
         return getAllRecipes().stream()
                 .filter(recipe -> recipe.getRecipeIngredients().stream()
                         .map(RecipeIngredient::getIngredient)
@@ -43,7 +55,8 @@ public class RecipeService {
     }
 
     public Recipe getRecipeById(Long id) {
-        return recipesRepository.findById(id).get();
+        return recipesRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found with id: " + id));
     }
 
     public void addRecipe(Recipe recipe) {

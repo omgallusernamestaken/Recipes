@@ -5,17 +5,14 @@ import com.example.recipes.entities.Recipe;
 import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.entities.RecipeTag;
 import com.example.recipes.services.IngredientService;
-import com.example.recipes.services.OpinionService;
 import com.example.recipes.services.RecipeService;
 import com.example.recipes.services.RecipeTagService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,9 +32,6 @@ public class RecipeController {
     @Autowired
     private RecipeTagService recipeTagService;
 
-    @Autowired
-    private OpinionService opinionService;
-
     @GetMapping()
     public String getAllRecipes(Model model) {
         List<Recipe> recipeList = recipeService.getAllRecipes();
@@ -45,22 +39,17 @@ public class RecipeController {
         return "recipe/recipes_list";
     }
 
-    //TODO fix mapping
-    @GetMapping("/recipebyname/{namePart}")
-    public String getRecipesThatNameContains(@PathVariable String namePart, Model model) {
-        List<Recipe> recipeList = recipeService.getRecipesThatNameContains(namePart);
+    @GetMapping(value = "/search", params = "name")
+    public String getRecipesThatNameContains(@RequestParam String name, Model model) {
+        List<Recipe> recipeList = recipeService.getRecipesThatNameContains(name);
         model.addAttribute("recipes", recipeList);
-        return "recipes_list";
+        return "recipe/recipes_list";
     }
 
     //TODO fix case sensitivity
-    //TODO fix mapping
-    @GetMapping("/ingredients/{ingredientName}")
-    public String getRecipesWithIngredient(@PathVariable String ingredientName, Model model) {
-        Ingredient ingredient = ingredientService.getIngredientByName(ingredientName)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ingredient not found"));
-
-        List<Recipe> recipeList = recipeService.getRecipesWithIngredient(ingredient);
+    @GetMapping(value = "/search", params = "ingredientName")
+    public String getRecipesWithIngredient(@RequestParam String ingredientName, Model model) {
+        List<Recipe> recipeList = recipeService.getRecipesWithIngredientName(ingredientName);
         model.addAttribute("recipes", recipeList);
         return "recipe/recipes_list";
     }

@@ -3,7 +3,9 @@ package com.example.recipes.services;
 import com.example.recipes.entities.Opinion;
 import com.example.recipes.repositories.OpinionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -14,7 +16,8 @@ public class OpinionService {
     private OpinionRepository opinionRepository;
 
     public Opinion getOpinionById(long id) {
-        return opinionRepository.findById(id).get();
+        return opinionRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Opinion not found with id: " + id));
     }
 
     public List<Opinion> getAllOpinions() {
