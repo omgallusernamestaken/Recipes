@@ -35,12 +35,13 @@
     <li th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + recipeIngredient.ingredient.unit.symbol}"></li>
   </ul>
 <br>
-<button th:attr="onclick='window.location.href=\'/opinions/recipe/' + ${recipe.id} + '\''">
-  Opinie
-</button>
-<button th:attr="onclick='window.location.href=\'/opinions/add/' + ${recipe.id} + '\''">
-  Dodaj opinie
-</button>
+<a th:href="@{/opinions/recipe/{recipeId}(recipeId=${recipe.id})}">
+  <button>Opinie</button>
+</a>
+
+<a th:href="@{/opinions/add/{recipeId}(recipeId=${recipe.id})}">
+  <button>Dodaj opinie</button>
+</a>
 <br>
 <button th:attr="onclick='window.location.href=\'/recipes/update/' + ${recipe.id} + '\''">
   Edytuj przepis
@@ -50,7 +51,7 @@
   Usuń przepis
 </button>
 
-<button onclick="window.location.href='/recipes/all'">
+<button onclick="window.location.href='/recipes'">
   Zobacz wszystkie przepisy
 </button>
 

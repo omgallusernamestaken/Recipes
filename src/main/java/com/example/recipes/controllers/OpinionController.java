@@ -19,6 +19,7 @@ public class OpinionController {
     @Autowired
     private RecipeService recipeService;
 
+    //TODO fix mapping
     @GetMapping("/recipe/{recipeId}")
     public String getAllOpinionsForRecipe(@PathVariable long recipeId, Model model) {
         model.addAttribute("opinionsList", opinionService.getAllOpinionForRecipeByRecipeId(recipeId));
@@ -27,7 +28,7 @@ public class OpinionController {
         return "opinion/opinions_list";
     }
 
-    @GetMapping("/opinion/{id}")
+    @GetMapping("/{id}")
     public String showOpinion(@PathVariable long id, Model model) {
         model.addAttribute("opinion", opinionService.getOpinionById(id));
         return "opinion/opinion_template";
@@ -50,12 +51,13 @@ public class OpinionController {
         return "redirect:/opinions/recipe/" + recipeId;
     }
 
-    @GetMapping("/edit/{id}")
-    public String showEditOpinionForm(@PathVariable long id, Model model) {
+    @GetMapping("/update/{id}")
+    public String showUpdateOpinionForm(@PathVariable long id, Model model) {
         Opinion editedOpinion = opinionService.getOpinionById(id);
         long recipeId = editedOpinion.getRecipe().getId();
         model.addAttribute("opinion", editedOpinion);
         model.addAttribute("recipeId", recipeId);
+        model.addAttribute("isEdit", true);
         model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
         return "opinion/opinion_add";
     }

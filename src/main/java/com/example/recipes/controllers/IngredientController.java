@@ -21,7 +21,7 @@ public class IngredientController {
     @Autowired
     private IngredientCategoryService ingredientCategoryService;
 
-    @GetMapping("/all")
+    @GetMapping()
     public String getAllIngredients(Model model) {
         List<Ingredient> listOfIngredients = ingredientService.getAllIngredients();
         model.addAttribute("ingredients", listOfIngredients);
@@ -42,8 +42,8 @@ public class IngredientController {
         return "redirect:/ingredients/all";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editIngredient(@PathVariable Long id, Model model) {
+    @GetMapping("/update/{id}")
+    public String updateIngredient(@PathVariable Long id, Model model) {
         Ingredient ingredient = ingredientService.getIngredientById(id).get();
         model.addAttribute("ingredient", ingredient);
         model.addAttribute("categories", ingredientCategoryService.getAllIngredientsCategories());
@@ -52,8 +52,8 @@ public class IngredientController {
         return "ingredient/ingredient_add";
     }
 
-    @PostMapping("/edit")
-    public String editIngredient(@ModelAttribute Ingredient ingredient) {
+    @PostMapping("/update")
+    public String updateIngredient(@ModelAttribute Ingredient ingredient) {
         ingredientService.updateIngredient(ingredient);
         return "redirect:/ingredients/all";
     }

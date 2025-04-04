@@ -28,7 +28,7 @@
         <td th:text="${ingredient.kcalIn100g}"></td>
         <td th:text="${ingredient.category.categoryName}"></td>
         <td>
-            <button th:attr="onclick='window.location.href=\'/ingredients/edit/' + ${ingredient.id} + '\''">
+            <button th:attr="onclick='window.location.href=\'/ingredients/update/' + ${ingredient.id} + '\''">
                 Edit
             </button>
             <button th:attr="onclick='window.location.href=\'/ingredients/delete/' + ${ingredient.id} + '\''">

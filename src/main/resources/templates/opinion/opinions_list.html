@@ -28,7 +28,7 @@
     <td th:text="${opinion.description}"></td>
     <td th:text="${opinion.author}"></td>
     <td>
-      <button th:attr="onclick='window.location.href=\'/opinions/opinion/' + ${opinion.id} + '\''">
+      <button th:attr="onclick='window.location.href=\'/opinions/' + ${opinion.id} + '\''">
         See opinion
       </button>
     </td>
@@ -36,7 +36,7 @@
   </tbody>
 </table>
 <br>
-<button th:attr="onclick='window.location.href=\'/recipes/recipe/' + ${recipeId} + '\''">
+<button th:onclick="|window.location.href='/recipes/${recipeId}'|">
   Go back
 </button>
 </body>

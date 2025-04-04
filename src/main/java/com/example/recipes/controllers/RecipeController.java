@@ -38,13 +38,14 @@ public class RecipeController {
     @Autowired
     private OpinionService opinionService;
 
-    @GetMapping("/all")
+    @GetMapping()
     public String getAllRecipes(Model model) {
         List<Recipe> recipeList = recipeService.getAllRecipes();
         model.addAttribute("recipes", recipeList);
         return "recipe/recipes_list";
     }
 
+    //TODO fix mapping
     @GetMapping("/recipebyname/{namePart}")
     public String getRecipesThatNameContains(@PathVariable String namePart, Model model) {
         List<Recipe> recipeList = recipeService.getRecipesThatNameContains(namePart);
@@ -53,6 +54,7 @@ public class RecipeController {
     }
 
     //TODO fix case sensitivity
+    //TODO fix mapping
     @GetMapping("/ingredients/{ingredientName}")
     public String getRecipesWithIngredient(@PathVariable String ingredientName, Model model) {
         Ingredient ingredient = ingredientService.getIngredientByName(ingredientName)
@@ -63,7 +65,7 @@ public class RecipeController {
         return "recipe/recipes_list";
     }
 
-    @GetMapping("/recipe/{id}")
+    @GetMapping("/{id}")
     public String getRecipeById(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
         model.addAttribute("recipe", recipe);
@@ -96,7 +98,7 @@ public class RecipeController {
 
         recipeService.addRecipe(recipe);
 
-        return "redirect:/recipes/all";
+        return "redirect:/recipes";
     }
 
     private List<RecipeIngredient> createRecipeIngredients(Recipe recipe, Map<Long, Integer> ingredientsMap) {
@@ -148,12 +150,12 @@ public class RecipeController {
 
         recipeService.addRecipe(recipe);
 
-        return "redirect:/recipes/all";
+        return "redirect:/recipes";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable long id) {
         recipeService.deleteRecipeById(id);
-        return "redirect:/recipes/all";
+        return "redirect:/recipes";
     }
 }

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Add recipe</title>
+  <title>Add opinion</title>
   <script src="/js/adding_recipe_script.js" type="text/javascript"></script>
   <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
@@ -44,8 +44,12 @@
 
   <p><strong>On recipe:</strong> <span th:text="${recipeName}"></span></p>
 
-  <button type="submit" th:if="${isEdit}">Dodaj</button>
-  <button type="submit" th:unless="${isEdit}">Zapisz zmiany</button>
+  <button type="submit" th:if="${isEdit}">Zapisz zmiany</button>
+  <button type="submit" th:unless="${isEdit}">Dodaj</button>
+
+  <button th:attr="onclick='window.location.href=\'/opinions/recipe/' + ${recipeId} + '\''">
+    Anuluj
+  </button>
 
 </form>
 
