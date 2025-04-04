@@ -19,19 +19,13 @@
     <th>Rate</th>
     <th>Description</th>
     <th>Author</th>
-    <th>See full opinion</th>
   </tr>
   </thead>
   <tbody>
-  <tr th:each="opinion : ${opinionsList}">
+  <tr th:each="opinion : ${opinionsList}" th:attr="onclick='window.location.href=\'/opinions/' + ${opinion.id} + '\''">
     <td th:text="${opinion.rating.stars}"></td>
     <td th:text="${opinion.description}"></td>
     <td th:text="${opinion.author}"></td>
-    <td>
-      <button th:attr="onclick='window.location.href=\'/opinions/' + ${opinion.id} + '\''">
-        See opinion
-      </button>
-    </td>
   </tr>
   </tbody>
 </table>

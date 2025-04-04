@@ -27,18 +27,18 @@
 <p><strong>Difficulty:</strong> <span th:text="${recipe.difficulty.symbol}"></span></p>
 
 <p><strong>Tags:</strong></p>
-<p th:each="tag : ${recipe.recipeTags}" th:text="${tag.tagName}"></p>
+<span th:each="tag, iterStat : ${recipe.recipeTags}" th:text="${tag.tagName} + (${iterStat.last} ? '' : ', ')"></span>
 
-<h1>Ingredients:</h1>
+<p><strong>Ingredients:</strong></p>
 
   <ul th:each="recipeIngredient : ${recipe.recipeIngredients}">
     <li th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + recipeIngredient.ingredient.unit.symbol}"></li>
   </ul>
 <br>
 <a th:href="@{/opinions/recipe/{recipeId}(recipeId=${recipe.id})}">
-  <button>Opinie</button>
+  <button>Zobacz opinie</button>
 </a>
-
+<br>
 <a th:href="@{/opinions/add/{recipeId}(recipeId=${recipe.id})}">
   <button>Dodaj opinie</button>
 </a>
