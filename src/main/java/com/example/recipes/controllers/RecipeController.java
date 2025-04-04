@@ -128,7 +128,6 @@ public class RecipeController {
         List<Ingredient> allIngredients = ingredientService.getAllIngredients();
         model.addAttribute("allIngredients", allIngredients);
 
-
         return "recipe/recipe_add";
     }
 
