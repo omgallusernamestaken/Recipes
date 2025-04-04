@@ -1,6 +1,7 @@
 package com.example.recipes.services;
 
 import com.example.recipes.entities.Ingredient;
+import com.example.recipes.entities.Opinion;
 import com.example.recipes.entities.Recipe;
 import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.repositories.RecipeIngredientRepository;
@@ -20,6 +21,9 @@ public class RecipeService {
 
     @Autowired
     private RecipeIngredientRepository recipeIngredientRepository;
+
+    @Autowired
+    private OpinionService opinionService;
 
     public List<Recipe> getAllRecipes() {
         return recipesRepository.findAll();
@@ -47,6 +51,10 @@ public class RecipeService {
         recipesRepository.save(recipe);
     }
 
+    public void updateRecipe(Recipe recipe) {
+        recipesRepository.save(recipe);
+    }
+
     @Transactional
     public void removeRecipeIngredients(Long recipeId) {
         recipeIngredientRepository.deleteByRecipeId(recipeId);
@@ -55,5 +63,23 @@ public class RecipeService {
     public void delete(Long id) {
         Recipe recipeToDelete = getRecipeById(id);
         recipesRepository.delete(recipeToDelete);
+    }
+
+    public void updateRatingForRecipe(long recipeId) {
+        Recipe recipe = getRecipeById(recipeId);
+        double newRating = calculateAvgRating(recipe.getOpinions());
+        recipe.setAvgRating(newRating);
+        recipesRepository.save(recipe);
+    }
+
+    private double calculateAvgRating(List<Opinion> opinions) {
+        if (opinions.isEmpty()) {
+            return 0.0;
+        }
+        double sum = opinions.stream()
+                .mapToInt(opinion -> opinion.getRating().getValue())
+                .sum();
+
+        return sum/ opinions.size();
     }
 }

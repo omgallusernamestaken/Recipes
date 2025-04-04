@@ -1,6 +1,7 @@
 package com.example.recipes.controllers;
 
 import com.example.recipes.entities.Opinion;
+import com.example.recipes.entities.Recipe;
 import com.example.recipes.services.OpinionService;
 import com.example.recipes.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,10 @@ public class OpinionController {
 
     @PostMapping("/add")
     public String addOpinion(@ModelAttribute Opinion opinion, @RequestParam("recipeId") long recipeId) {
-        opinion.setRecipe(recipeService.getRecipeById(recipeId));
+        Recipe recipe = recipeService.getRecipeById(recipeId);
+        opinion.setRecipe(recipe);
         opinionService.addOpinion(opinion);
+        recipeService.updateRatingForRecipe(recipeId);
         return "redirect:/opinions/recipe/" + recipeId;
     }
 
