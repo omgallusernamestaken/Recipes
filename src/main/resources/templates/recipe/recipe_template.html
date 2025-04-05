@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Recipe</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/recipe_template_styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -23,50 +23,77 @@
 </nav>
 
 <input type="hidden" id="recipeId" th:value="${recipe.id}">
-<h1 th:text="${recipe.recipeName}"></h1>
-<p><strong>Description:</strong> <span th:text="${recipe.recipeDescription}"></span></p>
 
-<p><strong>Avg rating: </strong> <span th:text="${recipe.avgRating}"></span>
-<span th:with="ratingVal=${recipe.avgRating}">
-    <span th:each="i : ${#numbers.sequence(1, 5)}">
-      <i th:if="${i <= ratingVal}" class="fa-solid fa-star star"></i>
-      <i th:if="${i > ratingVal && i - 0.5 != ratingVal}" class="fa-regular fa-star star-empty"></i>
-    </span>
-  </span>
-</p>
+<div class="recipe-wrapper">
+  <!-- Lewy górny -->
+  <div class="recipe-box recipe-header">
+    <h1 th:text="${recipe.recipeName}"></h1>
+    <p>
+      <strong>Rating:</strong>
+      <span th:text="${recipe.avgRating}"></span>
+      <span th:with="ratingVal=${recipe.avgRating}">
+        <span th:each="i : ${#numbers.sequence(1, 5)}">
+          <i th:if="${i <= ratingVal}" class="fa-solid fa-star star"></i>
+          <i th:if="${i > ratingVal}" class="fa-regular fa-star star-empty"></i>
+        </span>
+      </span>
+    </p>
+    <p><strong>Porcje:</strong> <span th:text="${recipe.amountOfPortions}"></span></p>
+    <p><strong>Czas gotowania:</strong> <span th:text="${recipe.preparationTime}"></span> min</p>
+    <p><strong>Poziom:</strong> <span th:text="${recipe.difficulty.symbol}"></span></p>
+    <p><strong>Tagi:</strong></p>
+    <div class="recipe-tags">
+      <a th:each="tag : ${recipe.recipeTags}" th:text="${tag.tagName}" href="http://localhost:8080/"></a>
+    </div>
+  </div>
 
-<p><strong>Portions amount:</strong> <span th:text="${recipe.amountOfPortions}"></span></p>
-<p><strong>Cooking time:</strong> <span th:text="${recipe.preparationTime}"></span> minut</p>
-<p><strong>Difficulty:</strong> <span th:text="${recipe.difficulty.symbol}"></span></p>
+  <!-- Prawy górny -->
+  <div class="recipe-box image-box">
+    Zdjęcie w przyszłości
+  </div>
 
-<p><strong>Tags:</strong></p>
-<span th:each="tag, iterStat : ${recipe.recipeTags}" th:text="${tag.tagName} + (${iterStat.last} ? '' : ', ')"></span>
+  <!-- Lewy dolny -->
+  <div class="recipe-box">
+    <h2>Składniki</h2>
+    <ul class="ingredients-list">
+      <li th:each="recipeIngredient : ${recipe.recipeIngredients}">
+        <label>
+          <input type="checkbox" name="ingredient" />
+          <span th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + recipeIngredient.ingredient.unit.symbol}"></span>
+        </label>
+      </li>
+    </ul>
+  </div>
 
-<p><strong>Ingredients:</strong></p>
+  <!-- Prawy dolny -->
+  <div class="recipe-box">
+    <p><strong>Opis:</strong></p>
+    <p th:text="${recipe.recipeDescription}"></p>
+  </div>
 
-  <ul th:each="recipeIngredient : ${recipe.recipeIngredients}">
-    <li th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + recipeIngredient.ingredient.unit.symbol}"></li>
-  </ul>
-<br>
-<a th:href="@{/opinions/recipe/{recipeId}(recipeId=${recipe.id})}">
-  <button>Zobacz opinie</button>
-</a>
-<br>
-<a th:href="@{/opinions/add/{recipeId}(recipeId=${recipe.id})}">
-  <button>Dodaj opinie</button>
-</a>
-<br>
-<button th:attr="onclick='window.location.href=\'/recipes/update/' + ${recipe.id} + '\''">
-  Edytuj przepis
-</button>
+  <a th:href="@{/opinions/recipe/{recipeId}(recipeId=${recipe.id})}">
+    <button>Zobacz opinie</button>
+  </a>
+  <br>
+  <a th:href="@{/opinions/add/{recipeId}(recipeId=${recipe.id})}">
+    <button>Dodaj opinie</button>
+  </a>
+  <br>
+  <button th:attr="onclick='window.location.href=\'/recipes/update/' + ${recipe.id} + '\''">
+    Edytuj przepis
+  </button>
 
-<button th:attr="onclick='if(confirm(\'Are you sure you want to delete this recipe?\')) window.location.href=\'/recipes/delete/' + ${recipe.id} + '\''">
-  Usuń przepis
-</button>
+  <button th:attr="onclick='if(confirm(\'Are you sure you want to delete this recipe?\')) window.location.href=\'/recipes/delete/' + ${recipe.id} + '\''">
+    Usuń przepis
+  </button>
 
-<button onclick="window.location.href='/recipes'">
-  Zobacz wszystkie przepisy
-</button>
+  <button onclick="window.location.href='/recipes'">
+    Zobacz wszystkie przepisy
+  </button>
+</div>
+
+
+
 
 </body>
 </html>
