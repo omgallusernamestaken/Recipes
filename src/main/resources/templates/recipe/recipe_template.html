@@ -26,10 +26,11 @@
 
 <div class="recipe-wrapper">
   <!-- Lewy górny -->
+  <!-- Lewy górny -->
   <div class="recipe-box recipe-header">
     <h1 th:text="${recipe.recipeName}"></h1>
-    <p>
-      <strong>Rating:</strong>
+
+    <div class="rating">
       <span th:text="${recipe.avgRating}"></span>
       <span th:with="ratingVal=${recipe.avgRating}">
         <span th:each="i : ${#numbers.sequence(1, 5)}">
@@ -37,13 +38,32 @@
           <i th:if="${i > ratingVal}" class="fa-regular fa-star star-empty"></i>
         </span>
       </span>
+    </div>
+
+    <div class="portions">
+      <span th:with="portionsAmt=${recipe.amountOfPortions}">
+        <span th:each="i : ${#numbers.sequence(1, 5)}">
+          <i th:if="${i <= portionsAmt}" class="fa-solid fa-person portion-icon"></i>
+        </span>
+      </span>
+    </div>
+
+    <p class="info-line">
+      <i class="fa-regular fa-clock"></i>
+      <span th:text="${recipe.preparationTime}"></span> minut
     </p>
-    <p><strong>Porcje:</strong> <span th:text="${recipe.amountOfPortions}"></span></p>
-    <p><strong>Czas gotowania:</strong> <span th:text="${recipe.preparationTime}"></span> min</p>
-    <p><strong>Poziom:</strong> <span th:text="${recipe.difficulty.symbol}"></span></p>
-    <p><strong>Tagi:</strong></p>
+
+    <p class="info-line">
+      <strong>Poziom:</strong>
+      <span th:text="${recipe.difficulty.symbol}"></span>
+    </p>
+
+    <p class="info-line"><strong>Tagi:</strong></p>
     <div class="recipe-tags">
-      <a th:each="tag : ${recipe.recipeTags}" th:text="${tag.tagName}" href="http://localhost:8080/"></a>
+      <a th:each="tag : ${recipe.recipeTags}"
+         th:text="${tag.tagName}"
+         href="http://localhost:8080/"
+         class="tag-link"></a>
     </div>
   </div>
 
@@ -67,7 +87,7 @@
 
   <!-- Prawy dolny -->
   <div class="recipe-box">
-    <p><strong>Opis:</strong></p>
+    <p><strong>Przygotowanie:</strong></p>
     <p th:text="${recipe.recipeDescription}"></p>
   </div>
 
