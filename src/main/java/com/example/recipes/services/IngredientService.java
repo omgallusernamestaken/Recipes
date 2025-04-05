@@ -21,7 +21,10 @@ public class IngredientService {
     }
 
     public Optional<Ingredient> getIngredientByName(String ingredientName) {
-        return ingredientRepository.findByIngredientName(ingredientName);
+        String lowerCaseName = ingredientName.toLowerCase();
+        return getAllIngredients().stream()
+                .filter(i -> i.getIngredientName().equalsIgnoreCase(lowerCaseName))
+                .findFirst();
     }
 
     public List<Ingredient> getAllIngredients() {

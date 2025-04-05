@@ -3,6 +3,7 @@ package com.example.recipes.services;
 import com.example.recipes.entities.Ingredient;
 import com.example.recipes.entities.Recipe;
 import com.example.recipes.entities.RecipeIngredient;
+import com.example.recipes.entities.RecipeTag;
 import com.example.recipes.repositories.RecipeIngredientRepository;
 import com.example.recipes.repositories.RecipesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,17 +42,25 @@ public class RecipeService {
     }
 
     public List<Recipe> getRecipesWithIngredientName(String ingredientName) {
-        String lowerCaseName = ingredientName.toLowerCase();
-
-        Ingredient ingredient = ingredientService.getAllIngredients().stream()
-                .filter(i -> i.getIngredientName().equalsIgnoreCase(lowerCaseName))
-                .findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ingredient not found"));
+        Ingredient ingredient = ingredientService.getIngredientByName(ingredientName)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Ingredient not found"));;
 
         return getAllRecipes().stream()
                 .filter(recipe -> recipe.getRecipeIngredients().stream()
                         .map(RecipeIngredient::getIngredient)
                         .anyMatch(i -> i.equals(ingredient)))
+                .collect(Collectors.toList());
+    }
+
+    public List<Recipe> getRecipesWithTagList(List<RecipeTag> tagList) {
+        return getAllRecipes().stream()
+                .filter(recipe -> recipe.getRecipeTags().containsAll(tagList))
+                .collect(Collectors.toList());
+    }
+
+    public List<Recipe> getRecipesWithExactTagList(List<RecipeTag> tagList) {
+        return getAllRecipes().stream()
+                .filter(recipe -> new HashSet<>(recipe.getRecipeTags()).equals(new HashSet<>(tagList)))
                 .collect(Collectors.toList());
     }
 

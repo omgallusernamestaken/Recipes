@@ -46,7 +46,6 @@ public class RecipeController {
         return "recipe/recipes_list";
     }
 
-    //TODO fix case sensitivity
     @GetMapping(value = "/search", params = "ingredientName")
     public String getRecipesWithIngredient(@RequestParam String ingredientName, Model model) {
         List<Recipe> recipeList = recipeService.getRecipesWithIngredientName(ingredientName);
