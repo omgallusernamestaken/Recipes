@@ -57,11 +57,16 @@ public class RecipeService {
 
     public List<Recipe> getRecipesWithTagCategory(String categoryName) {
         List<RecipeTag> listOfTags = recipeTagService.getTagsWithCategory(categoryName);
-
-        System.out.println("listOfTags " + listOfTags);
         return getAllRecipes().stream()
                 .filter(recipe -> recipe.getRecipeTags().stream()
                         .anyMatch(listOfTags::contains))
+                .collect(Collectors.toList());
+    }
+
+    public List<Recipe> getRecipesWithTag(String tagName) {
+        RecipeTag recipeTag = recipeTagService.getTagByTagName(tagName);
+        return getAllRecipes().stream()
+                .filter(recipe -> recipe.getRecipeTags().contains(recipeTag))
                 .collect(Collectors.toList());
     }
 

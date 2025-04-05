@@ -29,4 +29,8 @@ public class RecipeTagService {
         System.out.println("rec tag: " + recipeTags);
         return recipeTags;
     }
+
+    public RecipeTag getTagByTagName(String tagName) {
+        return recipeTagRepository.findByTagName(tagName);
+    }
 }

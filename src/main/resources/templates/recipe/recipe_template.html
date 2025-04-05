@@ -62,7 +62,7 @@
     <div class="recipe-tags">
       <a th:each="tag : ${recipe.recipeTags}"
          th:text="${tag.tagName}"
-         href="http://localhost:8080/"
+         th:href="@{http://localhost:8080/recipes/search(tagName=${tag.tagName})}"
          class="tag-link"></a>
     </div>
   </div>

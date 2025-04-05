@@ -11,4 +11,6 @@ import java.util.List;
 public interface RecipeTagRepository extends JpaRepository<RecipeTag, Long> {
 
     List<RecipeTag> findAllByTagCategory(TagCategory category);
+
+    RecipeTag findByTagName(String recipeTagName);
 }

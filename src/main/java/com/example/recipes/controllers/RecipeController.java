@@ -60,6 +60,14 @@ public class RecipeController {
         return "recipe/recipes_list";
     }
 
+    @GetMapping(value = "/search", params = "tagName")
+    public String getRecipesWithTag(@RequestParam String tagName, Model model) {
+        List<Recipe> recipeList = recipeService.getRecipesWithTag(tagName);
+        System.out.println(" lis " + recipeList);
+        model.addAttribute("recipes", recipeList);
+        return "recipe/recipes_list";
+    }
+
     @GetMapping("/{id}")
     public String getRecipeById(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
