@@ -22,7 +22,8 @@ CREATE TABLE ingredients (
 
 CREATE TABLE tags (
     tag_id SERIAL PRIMARY KEY,
-    tag_name VARCHAR(100) NOT NULL
+    tag_name VARCHAR(100) NOT NULL,
+    tag_category VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE recipes (

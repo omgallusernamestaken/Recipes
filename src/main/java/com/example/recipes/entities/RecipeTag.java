@@ -1,17 +1,18 @@
 package com.example.recipes.entities;
 
+import com.example.recipes.enums.TagCategory;
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Objects;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "tags")
+@EqualsAndHashCode
 public class RecipeTag {
 
     @Id
@@ -22,16 +23,7 @@ public class RecipeTag {
     @Column(name = "tag_name")
     private String tagName;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RecipeTag recipeTag = (RecipeTag) o;
-        return id == recipeTag.id && Objects.equals(tagName, recipeTag.tagName);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, tagName);
-    }
+    @Column(name = "tag_category")
+    @Enumerated(EnumType.STRING)
+    private TagCategory tagCategory;
 }

@@ -20,12 +20,13 @@ INSERT INTO ingredients (ingredient_name, kcal_in_100g, category_id, unit) VALUE
 ('Ryż', 130.00, 5, 'GRAM');
 
 -- INSERT dla tags (tagi)
-INSERT INTO tags (tag_name) VALUES 
-('Wegetariańskie'),
-('Bezglutenowe'),
-('Szybkie'),
-('Obiad'),
-('Kolacja');
+INSERT INTO tags (tag_name, tag_category) VALUES
+('Wegetariańskie', 'PREFERENCES'),
+('Bezglutenowe', 'PREFERENCES'),
+('Szybkie', 'PREFERENCES'),
+('Obiad', 'MEAL'),
+('Kolacja', 'MEAL'),
+('Wloskie', 'KITCHEN');
 
 -- INSERT dla recipes (przepisy)
 INSERT INTO recipes (recipe_name, recipe_description, portions_amount, preparation_time, difficulty, avg_rating) VALUES

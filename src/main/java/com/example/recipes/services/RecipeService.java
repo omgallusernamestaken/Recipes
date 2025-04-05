@@ -31,6 +31,9 @@ public class RecipeService {
     @Autowired
     private IngredientService ingredientService;
 
+    @Autowired
+    private RecipeTagService recipeTagService;
+
     public List<Recipe> getAllRecipes() {
         return recipesRepository.findAll();
     }
@@ -49,6 +52,16 @@ public class RecipeService {
                 .filter(recipe -> recipe.getRecipeIngredients().stream()
                         .map(RecipeIngredient::getIngredient)
                         .anyMatch(i -> i.equals(ingredient)))
+                .collect(Collectors.toList());
+    }
+
+    public List<Recipe> getRecipesWithTagCategory(String categoryName) {
+        List<RecipeTag> listOfTags = recipeTagService.getTagsWithCategory(categoryName);
+
+        System.out.println("listOfTags " + listOfTags);
+        return getAllRecipes().stream()
+                .filter(recipe -> recipe.getRecipeTags().stream()
+                        .anyMatch(listOfTags::contains))
                 .collect(Collectors.toList());
     }
 

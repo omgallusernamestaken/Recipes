@@ -53,6 +53,13 @@ public class RecipeController {
         return "recipe/recipes_list";
     }
 
+    @GetMapping(value = "/search", params = "categoryName")
+    public String getRecipesWithCategory(@RequestParam String categoryName, Model model) {
+        List<Recipe> recipeList = recipeService.getRecipesWithTagCategory(categoryName);
+        model.addAttribute("recipes", recipeList);
+        return "recipe/recipes_list";
+    }
+
     @GetMapping("/{id}")
     public String getRecipeById(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
@@ -63,7 +70,7 @@ public class RecipeController {
     @GetMapping("/add")
     public String showAddRecipeForm(Model model) {
         model.addAttribute("recipe", new Recipe());
-        model.addAttribute("allTags", recipeTagService.findAllTags());
+        model.addAttribute("allTags", recipeTagService.getAllTags());
 
         List<Ingredient> allIngredients = ingredientService.getAllIngredients();
         model.addAttribute("allIngredients", allIngredients);
@@ -78,7 +85,7 @@ public class RecipeController {
         ObjectMapper objectMapper = new ObjectMapper();
         Map<Long, Integer> ingredientsMap = objectMapper.readValue(ingredientMap, new TypeReference<Map<Long, Integer>>() {});
 
-        List<RecipeTag> selectedTags = recipeTagService.findAllByIdsList(recipeTags);
+        List<RecipeTag> selectedTags = recipeTagService.getAllByIdsList(recipeTags);
         recipe.setRecipeTags(selectedTags);
 
         List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
@@ -110,7 +117,7 @@ public class RecipeController {
     @GetMapping("/update/{id}")
     public String showAddRecipeFormForUpdate(@PathVariable("id") long id, Model model) {
         model.addAttribute("recipe", recipeService.getRecipeById(id));
-        model.addAttribute("allTags", recipeTagService.findAllTags());
+        model.addAttribute("allTags", recipeTagService.getAllTags());
         model.addAttribute("isEdit", true);
 
         List<Ingredient> allIngredients = ingredientService.getAllIngredients();
@@ -129,7 +136,7 @@ public class RecipeController {
 
         recipeService.removeRecipeIngredients(recipe.getId());
 
-        List<RecipeTag> selectedTags = recipeTagService.findAllByIdsList(recipeTags);
+        List<RecipeTag> selectedTags = recipeTagService.getAllByIdsList(recipeTags);
         recipe.setRecipeTags(selectedTags);
 
         List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
