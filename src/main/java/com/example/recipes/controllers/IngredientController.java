@@ -39,7 +39,7 @@ public class IngredientController {
     @PostMapping("add")
     public String addIngredient(@ModelAttribute Ingredient ingredient) {
         ingredientService.saveIngredient(ingredient);
-        return "redirect:/ingredients/all";
+        return "redirect:/ingredients";
     }
 
     @GetMapping("/update/{id}")
@@ -55,12 +55,12 @@ public class IngredientController {
     @PostMapping("/update")
     public String updateIngredient(@ModelAttribute Ingredient ingredient) {
         ingredientService.updateIngredient(ingredient);
-        return "redirect:/ingredients/all";
+        return "redirect:/ingredients";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteIngredient(@PathVariable Long id) {
         ingredientService.deleteIngredientById(id);
-        return "redirect:/ingredients/all";
+        return "redirect:/ingredients";
     }
 }
