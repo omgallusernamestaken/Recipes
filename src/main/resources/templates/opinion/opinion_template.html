@@ -7,6 +7,19 @@
 </head>
 
 <body>
+<!-- Górne menu -->
+<nav class="topbar">
+  <div class="menu">
+    <a href="http://localhost:8080/recipes/search?categoryName=preferences">SZYBKIE WYSZUKIWANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=meal">DANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=kitchen">REGION</a>
+    <a href="http://localhost:8080/recipes">SZUKAJ PO SKŁADNIKACH</a>
+  </div>
+  <div class="icon-container">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/kitchen.png" alt="Kitchen Icon"/>
+  </div>
+</nav>
+
 <input type="hidden" id="opinionId" th:value="${opinion.id}">
 <p><strong>Author:</strong> <span th:text="${opinion.author}"></span></p>
 <p><strong>Opinion on recipe:</strong> <span th:text="${opinion.recipe.recipeName}"></span></p>
