@@ -8,11 +8,14 @@ import com.example.recipes.services.IngredientService;
 import com.example.recipes.services.OpinionService;
 import com.example.recipes.services.RecipeService;
 import com.example.recipes.services.RecipeTagService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -90,22 +93,82 @@ public class RecipeController {
     }
 
     @PostMapping("/add")
-    public String addRecipe(@ModelAttribute Recipe recipe,
+    public String addRecipe(@ModelAttribute @Valid Recipe recipe,
+                            BindingResult bindingResult,
                             @RequestParam List<Long> recipeTags,
-                            @RequestParam String ingredientMap) throws IOException {
+                            @RequestParam String ingredientMap,
+                            Model model) throws IOException {
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<Long, Integer> ingredientsMap = objectMapper.readValue(ingredientMap, new TypeReference<Map<Long, Integer>>() {});
+        buildMapperForRecipeIngredients(ingredientMap, recipe);
+
+        if (bindingResult.hasErrors()) {
+            prepareFormModel(model, ingredientMap);
+            return "recipe/recipe_add";
+        }
 
         List<RecipeTag> selectedTags = recipeTagService.getAllByIdsList(recipeTags);
         recipe.setRecipeTags(selectedTags);
 
-        List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
-        recipe.setRecipeIngredients(recipeIngredients);
+        recipeService.addRecipe(recipe);
+
+        return "redirect:/recipes";
+    }
+
+    @GetMapping("/update/{id}")
+    public String showAddRecipeFormForUpdate(@PathVariable("id") long id, Model model) {
+        model.addAttribute("recipe", recipeService.getRecipeById(id));
+        model.addAttribute("allTags", recipeTagService.getAllTags());
+        model.addAttribute("isEdit", true);
+
+        List<Ingredient> allIngredients = ingredientService.getAllIngredients();
+        model.addAttribute("allIngredients", allIngredients);
+
+        return "recipe/recipe_add";
+    }
+
+    @PostMapping("/update")
+    public String updateRecipe(@ModelAttribute @Valid Recipe recipe,
+                               BindingResult bindingResult,
+                               @RequestParam List<Long> recipeTags,
+                               @RequestParam String ingredientMap,
+                               Model model) throws IOException {
+
+        buildMapperForRecipeIngredients(ingredientMap, recipe);
+
+        if (bindingResult.hasErrors()) {
+            prepareFormModel(model, ingredientMap);
+            model.addAttribute("isEdit", true);
+            return "recipe/recipe_add";
+        }
+
+        recipeService.removeRecipeIngredients(recipe.getId());
+
+        List<RecipeTag> selectedTags = recipeTagService.getAllByIdsList(recipeTags);
+        recipe.setRecipeTags(selectedTags);
 
         recipeService.addRecipe(recipe);
 
         return "redirect:/recipes";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRecipe(@PathVariable long id) {
+        recipeService.deleteRecipeById(id);
+        return "redirect:/recipes";
+    }
+
+    private void prepareFormModel(Model model,String ingredientMap) {
+        model.addAttribute("allTags", recipeTagService.getAllTags());
+        model.addAttribute("allIngredients", ingredientService.getAllIngredients());
+        model.addAttribute("ingredientMap", ingredientMap);
+    }
+
+    private void buildMapperForRecipeIngredients(String ingredientMap, Recipe recipe) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<Long, Integer> ingredientsMap = objectMapper.readValue(ingredientMap, new TypeReference<Map<Long, Integer>>() {});
+
+        List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
+        recipe.setRecipeIngredients(recipeIngredients);
     }
 
     private List<RecipeIngredient> createRecipeIngredients(Recipe recipe, Map<Long, Integer> ingredientsMap) {
@@ -124,44 +187,5 @@ public class RecipeController {
             recipeIngredients.add(recipeIngredient);
         }
         return recipeIngredients;
-    }
-
-    @GetMapping("/update/{id}")
-    public String showAddRecipeFormForUpdate(@PathVariable("id") long id, Model model) {
-        model.addAttribute("recipe", recipeService.getRecipeById(id));
-        model.addAttribute("allTags", recipeTagService.getAllTags());
-        model.addAttribute("isEdit", true);
-
-        List<Ingredient> allIngredients = ingredientService.getAllIngredients();
-        model.addAttribute("allIngredients", allIngredients);
-
-        return "recipe/recipe_add";
-    }
-
-    @PostMapping("/update")
-    public String updateRecipe(@ModelAttribute Recipe recipe,
-                            @RequestParam List<Long> recipeTags,
-                            @RequestParam String ingredientMap) throws IOException {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        Map<Long, Integer> ingredientsMap = objectMapper.readValue(ingredientMap, new TypeReference<Map<Long, Integer>>() {});
-
-        recipeService.removeRecipeIngredients(recipe.getId());
-
-        List<RecipeTag> selectedTags = recipeTagService.getAllByIdsList(recipeTags);
-        recipe.setRecipeTags(selectedTags);
-
-        List<RecipeIngredient> recipeIngredients = createRecipeIngredients(recipe, ingredientsMap);
-        recipe.setRecipeIngredients(recipeIngredients);
-
-        recipeService.addRecipe(recipe);
-
-        return "redirect:/recipes";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteRecipe(@PathVariable long id) {
-        recipeService.deleteRecipeById(id);
-        return "redirect:/recipes";
     }
 }

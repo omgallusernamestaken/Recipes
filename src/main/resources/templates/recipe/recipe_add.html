@@ -29,10 +29,16 @@
     <input type="hidden" th:field="*{avgRating}" />
 
     <label for="recipeName">Recipe name:</label>
-    <input type="text" id="recipeName" th:field="*{recipeName}" required>
+    <input type="text" id="recipeName" th:field="*{recipeName}">
+    <span class="error-message"
+           th:if="${#fields.hasErrors('recipeName')}"
+           th:text="${#fields.errors('recipeName')}"></span>
 
     <label for="recipeDescription">Description:</label>
-    <textarea id="recipeDescription" th:field="*{recipeDescription}" required oninput="autoResize(this)"></textarea>
+    <textarea id="recipeDescription" th:field="*{recipeDescription}" oninput="autoResize(this)"></textarea>
+    <span class="error-message"
+          th:if="${#fields.hasErrors('recipeDescription')}"
+          th:text="${#fields.errors('recipeDescription')}"></span>
 
     <!--    ingredients-->
 
@@ -85,10 +91,16 @@
     </div>
 
     <label for="amountOfPortions">Portions:</label>
-    <input type="text" id="amountOfPortions" th:field="*{amountOfPortions}" required>
+    <input type="text" id="amountOfPortions" th:field="*{amountOfPortions}">
+    <span class="error-message"
+          th:if="${#fields.hasErrors('amountOfPortions')}"
+          th:text="${#fields.errors('amountOfPortions')}"></span>
 
     <label for="preparationTime">Preparation time:</label>
-    <input type="text" id="preparationTime" th:field="*{preparationTime}" required>
+    <input type="text" id="preparationTime" th:field="*{preparationTime}">
+    <span class="error-message"
+          th:if="${#fields.hasErrors('preparationTime')}"
+          th:text="${#fields.errors('preparationTime')}"></span>
 
     <label for="difficulty">Difficulty:</label>
     <select id="difficulty" th:field="*{difficulty}">

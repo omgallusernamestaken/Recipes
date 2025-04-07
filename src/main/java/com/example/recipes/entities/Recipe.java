@@ -5,6 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -26,9 +29,11 @@ public class Recipe {
     private long id;
 
     @Column(name = "recipe_name")
+    @NotBlank(message = "Pole nie może być puste")
     private String recipeName;
 
     @Column(name = "recipe_description")
+    @NotBlank(message = "Pole nie może być puste")
     private String recipeDescription;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -43,16 +48,19 @@ public class Recipe {
     private List<RecipeTag> recipeTags;
 
     @Column(name = "portions_amount")
+    @Min(value = 1, message = "Liczba porcji nie może być mniejsza od 1")
     private int amountOfPortions;
 
     @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Opinion> opinions;
 
     @Column(name = "preparation_time")
+    @Min(value = 1, message = "Czas nie może być mniejszy od 1 minuty")
     private int preparationTime;
 
     @Column(name = "difficulty")
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Pole nie może być puste")
     private Difficulty difficulty;
 
     @Column(name = "avg_rating")

@@ -3,6 +3,8 @@ package com.example.recipes.entities;
 import com.example.recipes.enums.Unit;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,9 +25,11 @@ public class Ingredient {
     private long id;
 
     @Column(name = "ingredient_name")
+    @NotNull
     private String ingredientName;
 
     @Column(name = "kcal_in_100g")
+    @Min(value = 0)
     private double kcalIn100g;
 
     @OneToOne(cascade = CascadeType.PERSIST)

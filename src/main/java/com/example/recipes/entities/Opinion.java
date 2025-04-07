@@ -2,6 +2,8 @@ package com.example.recipes.entities;
 
 import com.example.recipes.enums.Rating;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,12 +22,16 @@ public class Opinion {
 
     @Column(name = "opinion_rate")
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Rating rating;
 
     @Column(name = "opinion_author")
+    @NotNull
     private String author;
 
     @Column(name = "opinion_description")
+    @NotNull
+    @Size(max = 300)
     private String description;
 
     @ManyToOne
