@@ -24,9 +24,7 @@ public class RecipeTagService {
 
     public List<RecipeTag> getTagsWithCategory(String categoryName) {
         TagCategory category = TagCategory.valueOf(categoryName.toUpperCase());
-        System.out.println("tag cat: " + category.ordinal());
         List<RecipeTag> recipeTags = recipeTagRepository.findAllByTagCategory(category);
-        System.out.println("rec tag: " + recipeTags);
         return recipeTags;
     }
 

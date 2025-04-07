@@ -198,3 +198,23 @@ ul#selectedTags li button:hover {
     background-color: #555;
     border-radius: 5px;
 }
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    resize: none;        /* blokuje ręczne przeciąganie */
+    overflow: hidden;    /* ukrywa scrolla */
+    line-height: 1.5;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #888;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}

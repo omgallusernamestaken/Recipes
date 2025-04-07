@@ -3,11 +3,13 @@ package com.example.recipes.services;
 import com.example.recipes.entities.Opinion;
 import com.example.recipes.repositories.OpinionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OpinionService {
@@ -21,11 +23,11 @@ public class OpinionService {
     }
 
     public List<Opinion> getAllOpinions() {
-        return opinionRepository.findAll();
+        return opinionRepository.findAll(Sort.by(Sort.Order.desc("id")));
     }
 
     public List<Opinion> getAllOpinionForRecipeByRecipeId(long recipeId) {
-        return opinionRepository.getAllOpinionsByRecipeId(recipeId);
+        return opinionRepository.getAllOpinionsByRecipeIdOrderByIdDesc(recipeId);
     }
 
     public void addOpinion(Opinion opinion) {
@@ -34,5 +36,9 @@ public class OpinionService {
 
     public void deleteOpinionById(long id) {
         opinionRepository.delete(getOpinionById(id));
+    }
+
+    public List<Opinion> getThreeLatestOpinionsForRecipe(long id) {
+        return getAllOpinionForRecipeByRecipeId(id).stream().limit(3).collect(Collectors.toList());
     }
 }

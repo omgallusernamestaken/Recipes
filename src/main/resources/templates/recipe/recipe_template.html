@@ -91,29 +91,39 @@
     <p th:text="${recipe.recipeDescription}"></p>
   </div>
 
-  <a th:href="@{/opinions/recipe/{recipeId}(recipeId=${recipe.id})}">
-    <button>Zobacz opinie</button>
-  </a>
-  <br>
-  <a th:href="@{/opinions/add/{recipeId}(recipeId=${recipe.id})}">
-    <button>Dodaj opinie</button>
-  </a>
-  <br>
-  <button th:attr="onclick='window.location.href=\'/recipes/update/' + ${recipe.id} + '\''">
-    Edytuj przepis
-  </button>
+  <div class="button-group">
+    <a th:href="@{/recipes/update/{recipeId}(recipeId=${recipe.id})}">
+      <button>Edytuj przepis</button>
+    </a>
+    <a th:href="@{/recipes/delete/{recipeId}(recipeId=${recipe.id})}">
+      <button>Usuń przepis</button>
+    </a>
+    <a th:href="@{/recipes}">
+      <button>Zobacz wszystkie przepisy</button>
+    </a>
+  </div>
 
-  <button th:attr="onclick='if(confirm(\'Are you sure you want to delete this recipe?\')) window.location.href=\'/recipes/delete/' + ${recipe.id} + '\''">
-    Usuń przepis
-  </button>
-
-  <button onclick="window.location.href='/recipes'">
-    Zobacz wszystkie przepisy
-  </button>
+  <div class="opinions-section">
+    <h2>Opinie użytkowników</h2>
+    <div th:each="opinion : ${opinions}" class="opinion-card">
+      <input type="hidden" th:value="${opinion.id}"/>
+      <p><strong>Autor:</strong> <span th:text="${opinion.author}"></span></p>
+      <p>
+        <strong>Ocena:</strong>
+        <span th:text="${opinion.rating.stars}"></span>
+      </p>
+      <p><strong>Opinia:</strong></p>
+      <p th:text="${opinion.description}"></p>
+    </div>
+    <a th:href="@{/opinions/recipe/{recipeId}(recipeId=${recipe.id})}">
+      <button>Zobacz wszystkie opinie</button>
+    </a>
+    <br><br>
+    <a th:href="@{/opinions/add/{recipeId}(recipeId=${recipe.id})}">
+      <button>Dodaj opinie</button>
+    </a>
+  </div>
 </div>
-
-
-
 
 </body>
 </html>

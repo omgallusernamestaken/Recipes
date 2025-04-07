@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface OpinionRepository extends JpaRepository<Opinion, Long> {
 
-    List<Opinion> getAllOpinionsByRecipeId(long recipeId);
+    List<Opinion> getAllOpinionsByRecipeIdOrderByIdDesc(long recipeId);
 }

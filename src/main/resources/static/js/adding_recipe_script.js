@@ -199,5 +199,17 @@ function init() {
         document.getElementById("tagsContainer").appendChild(input);
     }
 
+    function autoResize(textarea) {
+        textarea.style.height = 'auto'; // Resetuje wysokość
+        textarea.style.height = (textarea.scrollHeight) + 'px'; // Dopasowuje do zawartości
+    }
+
+    window.addEventListener('load', function () {
+        const textarea = document.getElementById('recipeDescription');
+        if (textarea) {
+            autoResize(textarea); // uruchom przy załadowaniu jeśli jest już jakiś tekst
+        }
+    });
+
     init();
 });

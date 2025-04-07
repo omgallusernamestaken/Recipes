@@ -32,7 +32,7 @@
     <input type="text" id="recipeName" th:field="*{recipeName}" required>
 
     <label for="recipeDescription">Description:</label>
-    <input type="text" id="recipeDescription" th:field="*{recipeDescription}" required>
+    <textarea id="recipeDescription" th:field="*{recipeDescription}" required oninput="autoResize(this)"></textarea>
 
     <!--    ingredients-->
 

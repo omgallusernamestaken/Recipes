@@ -5,6 +5,7 @@ import com.example.recipes.entities.Recipe;
 import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.entities.RecipeTag;
 import com.example.recipes.services.IngredientService;
+import com.example.recipes.services.OpinionService;
 import com.example.recipes.services.RecipeService;
 import com.example.recipes.services.RecipeTagService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -31,6 +32,9 @@ public class RecipeController {
 
     @Autowired
     private RecipeTagService recipeTagService;
+
+    @Autowired
+    private OpinionService opinionService;
 
     @GetMapping()
     public String getAllRecipes(Model model) {
@@ -63,7 +67,6 @@ public class RecipeController {
     @GetMapping(value = "/search", params = "tagName")
     public String getRecipesWithTag(@RequestParam String tagName, Model model) {
         List<Recipe> recipeList = recipeService.getRecipesWithTag(tagName);
-        System.out.println(" lis " + recipeList);
         model.addAttribute("recipes", recipeList);
         return "recipe/recipes_list";
     }
@@ -72,6 +75,7 @@ public class RecipeController {
     public String getRecipeById(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
         model.addAttribute("recipe", recipe);
+        model.addAttribute("opinions", opinionService.getThreeLatestOpinionsForRecipe(id));
         return "recipe/recipe_template";
     }
 
