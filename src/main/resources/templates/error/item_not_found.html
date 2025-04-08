@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Nie znaleziono przepisu</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="menu">
+    <a href="http://localhost:8080/recipes/search?categoryName=preferences">SZYBKIE WYSZUKIWANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=meal">DANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=kitchen">REGION</a>
+    <a href="http://localhost:8080/recipes">SZUKAJ PO SKŁADNIKACH</a>
+  </div>
+  <div class="icon-container">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/kitchen.png" alt="Kitchen Icon"/>
+  </div>
+</nav>
+
+<div style="max-width: 700px; margin: 0 auto; text-align: center; padding: 60px 20px;">
+  <h1>😕 Ups! Coś poszło nie tak...</h1>
+  <p style="font-size: 18px; margin-top: 20px;" th:text="${message} ?: 'Wygląda na to, że szukany przepis nie istnieje w bazie.'"></p>
+
+  <a th:href="@{/recipes}">
+    <button style="margin-top: 30px;">Powrót do listy przepisów</button>
+  </a>
+</div>
+
+</body>
+</html>

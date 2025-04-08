@@ -4,6 +4,7 @@ import com.example.recipes.entities.Ingredient;
 import com.example.recipes.entities.Recipe;
 import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.entities.RecipeTag;
+import com.example.recipes.exceptions.RecipeNotFoundException;
 import com.example.recipes.services.IngredientService;
 import com.example.recipes.services.OpinionService;
 import com.example.recipes.services.RecipeService;
@@ -75,7 +76,7 @@ public class RecipeController {
     }
 
     @GetMapping("/{id}")
-    public String getRecipeById(@PathVariable Long id, Model model) {
+    public String getRecipeById(@PathVariable Long id, Model model) throws RecipeNotFoundException {
         Recipe recipe = recipeService.getRecipeById(id);
         model.addAttribute("recipe", recipe);
         model.addAttribute("opinions", opinionService.getThreeLatestOpinionsForRecipe(id));
@@ -115,7 +116,7 @@ public class RecipeController {
     }
 
     @GetMapping("/update/{id}")
-    public String showAddRecipeFormForUpdate(@PathVariable("id") long id, Model model) {
+    public String showAddRecipeFormForUpdate(@PathVariable("id") long id, Model model) throws RecipeNotFoundException {
         model.addAttribute("recipe", recipeService.getRecipeById(id));
         model.addAttribute("allTags", recipeTagService.getAllTags());
         model.addAttribute("isEdit", true);

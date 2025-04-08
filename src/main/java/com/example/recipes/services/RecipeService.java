@@ -4,9 +4,11 @@ import com.example.recipes.entities.Ingredient;
 import com.example.recipes.entities.Recipe;
 import com.example.recipes.entities.RecipeIngredient;
 import com.example.recipes.entities.RecipeTag;
+import com.example.recipes.exceptions.RecipeNotFoundException;
 import com.example.recipes.repositories.RecipeIngredientRepository;
 import com.example.recipes.repositories.RecipesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +37,7 @@ public class RecipeService {
     private RecipeTagService recipeTagService;
 
     public List<Recipe> getAllRecipes() {
-        return recipesRepository.findAll();
+        return recipesRepository.findAll(Sort.by(Sort.Order.asc("id")));
     }
 
     public List<Recipe> getRecipesThatNameContains(String namePart) {
@@ -84,7 +86,7 @@ public class RecipeService {
 
     public Recipe getRecipeById(Long id) {
         return recipesRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Recipe not found with id: " + id));
+                .orElseThrow(() -> new RecipeNotFoundException(id));
     }
 
     public void addRecipe(Recipe recipe) {

@@ -2,6 +2,7 @@ package com.example.recipes.controllers;
 
 import com.example.recipes.entities.Opinion;
 import com.example.recipes.entities.Recipe;
+import com.example.recipes.exceptions.RecipeNotFoundException;
 import com.example.recipes.services.OpinionService;
 import com.example.recipes.services.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class OpinionController {
 
     //TODO fix mapping
     @GetMapping("/recipe/{recipeId}")
-    public String getAllOpinionsForRecipe(@PathVariable long recipeId, Model model) {
+    public String getAllOpinionsForRecipe(@PathVariable long recipeId, Model model) throws RecipeNotFoundException {
         model.addAttribute("opinionsList", opinionService.getAllOpinionForRecipeByRecipeId(recipeId));
         model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
         model.addAttribute("recipeId", recipeService.getRecipeById(recipeId).getId());
@@ -35,7 +36,7 @@ public class OpinionController {
     }
 
     @GetMapping("/add/{recipeId}")
-    public String showAddOpinionForm(@PathVariable long recipeId, Model model) {
+    public String showAddOpinionForm(@PathVariable long recipeId, Model model) throws RecipeNotFoundException {
         model.addAttribute("opinion", new Opinion());
         model.addAttribute("recipeId", recipeId);
         model.addAttribute("recipeName", recipeService.getRecipeById(recipeId).getRecipeName());
@@ -43,7 +44,7 @@ public class OpinionController {
     }
 
     @PostMapping("/add")
-    public String addOpinion(@ModelAttribute Opinion opinion, @RequestParam("recipeId") long recipeId) {
+    public String addOpinion(@ModelAttribute Opinion opinion, @RequestParam("recipeId") long recipeId) throws RecipeNotFoundException {
         Recipe recipe = recipeService.getRecipeById(recipeId);
         opinion.setRecipe(recipe);
         opinionService.addOpinion(opinion);
@@ -52,7 +53,7 @@ public class OpinionController {
     }
 
     @GetMapping("/update/{id}")
-    public String showUpdateOpinionForm(@PathVariable long id, Model model) {
+    public String showUpdateOpinionForm(@PathVariable long id, Model model) throws RecipeNotFoundException {
         Opinion editedOpinion = opinionService.getOpinionById(id);
         long recipeId = editedOpinion.getRecipe().getId();
         model.addAttribute("opinion", editedOpinion);
