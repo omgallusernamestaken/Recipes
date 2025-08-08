@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredients List</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<!-- Górne menu -->
+<nav class="topbar">
+    <div class="menu">
+        <a href="http://localhost:8080/recipes/search?categoryName=preferences">SZYBKIE WYSZUKIWANIE</a>
+        <a href="http://localhost:8080/recipes/search?categoryName=meal">DANIE</a>
+        <a href="http://localhost:8080/recipes/search?categoryName=kitchen">REGION</a>
+        <a href="http://localhost:8080/recipes">SZUKAJ PO SKŁADNIKACH</a>
+    </div>
+    <div class="icon-container">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/kitchen.png" alt="Kitchen Icon"/>
+    </div>
+</nav>
+
+<h1>Ingredients List</h1>
+
+<div th:if="${#lists.isEmpty(ingredients)}">
+    <p>No ingredients found.</p>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Ingredient Name</th>
+        <th>Calories per 100g</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ingredient : ${ingredients}">
+        <td th:text="${ingredient.ingredientName}"></td>
+        <td th:text="${ingredient.kcalIn100g}"></td>
+        <td th:text="${ingredient.category.categoryName}"></td>
+        <td>
+            <button th:attr="onclick='window.location.href=\'/ingredients/update/' + ${ingredient.id} + '\''">
+                Edit
+            </button>
+            <button th:attr="onclick='window.location.href=\'/ingredients/delete/' + ${ingredient.id} + '\''">
+                Delete
+            </button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

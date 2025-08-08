@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Opinion</title>
+  <link rel="stylesheet" href="/css/recipe_template_styles.css">
+</head>
+
+<body>
+<!-- Górne menu -->
+<nav class="topbar">
+  <div class="menu">
+    <a href="http://localhost:8080/recipes/search?categoryName=preferences">SZYBKIE WYSZUKIWANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=meal">DANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=kitchen">REGION</a>
+    <a href="http://localhost:8080/recipes">SZUKAJ PO SKŁADNIKACH</a>
+  </div>
+  <div class="icon-container">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/kitchen.png" alt="Kitchen Icon"/>
+  </div>
+</nav>
+
+<input type="hidden" id="opinionId" th:value="${opinion.id}">
+<p><strong>Author:</strong> <span th:text="${opinion.author}"></span></p>
+<p><strong>Opinion on recipe:</strong> <span th:text="${opinion.recipe.recipeName}"></span></p>
+<p><strong>Rate:</strong> <span th:text="${opinion.rating.stars}"></span></p>
+<p><strong>Description:</strong> <span th:text="${opinion.description}"></span></p>
+
+
+<br>
+<button th:attr="onclick='window.location.href=\'/opinions/update/' + ${opinion.recipe.id} + '\''">
+  Edytuj
+</button>
+<br>
+<button th:attr="onclick='window.location.href=\'/opinions/delete/' + ${opinion.id} + '?recipeId=' + ${opinion.recipe.id} + '\''">
+  Usuń
+</button>
+
+<br>
+<button th:attr="onclick='window.location.href=\'/opinions/recipe/' + ${opinion.recipe.id} + '\''">
+  Wróć do listy
+</button>
+
+</body>
+</html>

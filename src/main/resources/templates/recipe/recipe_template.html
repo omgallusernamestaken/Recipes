@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe</title>
+  <link rel="stylesheet" href="/css/recipe_template_styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+<!-- Górne menu -->
+<nav class="topbar">
+  <div class="menu">
+    <a href="http://localhost:8080/recipes/search?categoryName=preferences">SZYBKIE WYSZUKIWANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=meal">DANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=kitchen">REGION</a>
+    <a href="http://localhost:8080/recipes">SZUKAJ PO SKŁADNIKACH</a>
+  </div>
+  <div class="icon-container">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/kitchen.png" alt="Kitchen Icon"/>
+  </div>
+</nav>
+
+<input type="hidden" id="recipeId" th:value="${recipe.id}">
+
+<div class="recipe-wrapper">
+  <!-- Lewy górny -->
+  <!-- Lewy górny -->
+  <div class="recipe-box recipe-header">
+    <h1 th:text="${recipe.recipeName}"></h1>
+
+    <div class="rating">
+      <span th:text="${recipe.avgRating}"></span>
+      <span th:with="ratingVal=${recipe.avgRating}">
+        <span th:each="i : ${#numbers.sequence(1, 5)}">
+          <i th:if="${i <= ratingVal}" class="fa-solid fa-star star"></i>
+          <i th:if="${i > ratingVal}" class="fa-regular fa-star star-empty"></i>
+        </span>
+      </span>
+    </div>
+
+    <div class="portions">
+      <span th:with="portionsAmt=${recipe.amountOfPortions}">
+        <span th:each="i : ${#numbers.sequence(1, 5)}">
+          <i th:if="${i <= portionsAmt}" class="fa-solid fa-person portion-icon"></i>
+        </span>
+      </span>
+    </div>
+
+    <p class="info-line">
+      <i class="fa-regular fa-clock"></i>
+      <span th:text="${recipe.preparationTime}"></span> minut
+    </p>
+
+    <p class="info-line">
+      <strong>Poziom:</strong>
+      <span th:text="${recipe.difficulty.symbol}"></span>
+    </p>
+
+    <p class="info-line"><strong>Tagi:</strong></p>
+    <div class="recipe-tags">
+      <a th:each="tag : ${recipe.recipeTags}"
+         th:text="${tag.tagName}"
+         th:href="@{http://localhost:8080/recipes/search(tagName=${tag.tagName})}"
+         class="tag-link"></a>
+    </div>
+  </div>
+
+  <!-- Prawy górny -->
+  <div class="recipe-box image-box">
+    Zdjęcie w przyszłości
+  </div>
+
+  <!-- Lewy dolny -->
+  <div class="recipe-box">
+    <h2>Składniki</h2>
+    <ul class="ingredients-list">
+      <li th:each="recipeIngredient : ${recipe.recipeIngredients}">
+        <label>
+          <input type="checkbox" name="ingredient" />
+          <span th:text="${recipeIngredient.ingredient.ingredientName + ' - ' + recipeIngredient.quantity + recipeIngredient.ingredient.unit.symbol}"></span>
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Prawy dolny -->
+  <div class="recipe-box">
+    <p><strong>Przygotowanie:</strong></p>
+    <p th:text="${recipe.recipeDescription}"></p>
+  </div>
+
+  <div class="button-group">
+    <a th:href="@{/recipes/update/{recipeId}(recipeId=${recipe.id})}">
+      <button>Edytuj przepis</button>
+    </a>
+    <a th:href="@{/recipes/delete/{recipeId}(recipeId=${recipe.id})}">
+      <button>Usuń przepis</button>
+    </a>
+    <a th:href="@{/recipes}">
+      <button>Zobacz wszystkie przepisy</button>
+    </a>
+  </div>
+
+  <div class="opinions-section">
+    <h2>Opinie użytkowników</h2>
+    <div th:each="opinion : ${opinions}" class="opinion-card">
+      <input type="hidden" th:value="${opinion.id}"/>
+      <p><strong>Autor:</strong> <span th:text="${opinion.author}"></span></p>
+      <p>
+        <strong>Ocena:</strong>
+        <span th:text="${opinion.rating.stars}"></span>
+      </p>
+      <p><strong>Opinia:</strong></p>
+      <p th:text="${opinion.description}"></p>
+    </div>
+    <a th:href="@{/opinions/recipe/{recipeId}(recipeId=${recipe.id})}">
+      <button>Zobacz wszystkie opinie</button>
+    </a>
+    <br><br>
+    <a th:href="@{/opinions/add/{recipeId}(recipeId=${recipe.id})}">
+      <button>Dodaj opinie</button>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

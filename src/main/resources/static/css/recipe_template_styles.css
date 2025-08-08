@@ -1,0 +1,233 @@
+/* Podstawowy styl */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Topbar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px 20px;
+  margin-bottom: 50px;
+}
+
+.menu {
+  display: flex;
+}
+
+.menu a {
+  color: white;
+  text-decoration: none;
+  padding: 14px 20px;
+  transition: background-color 0.3s;
+  margin: 0 5px;
+}
+
+.menu a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+.icon-container img {
+  width: 32px;
+  height: 32px;
+  filter: brightness(0) invert(1);
+}
+
+/* Grid */
+.recipe-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 30px;
+  padding: 40px;
+}
+
+/* Boxy */
+.recipe-box {
+  background-color: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Nagłówek przepisu */
+.recipe-header h1 {
+  font-size: 28px;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+/* Gwiazdki oceny */
+.rating, .portions {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.star {
+  color: gold;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  margin-right: 2px;
+}
+
+.star-empty {
+  color: lightgray;
+  margin-right: 2px;
+}
+
+/* Porcje */
+.portion-icon {
+  margin-right: 4px;
+  color: #666;
+}
+
+/* Informacje o czasie itd. */
+.info-line {
+  font-size: 16px;
+  margin: 6px 0;
+  color: #555;
+}
+
+/* Tagi */
+.recipe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tag-link {
+  background-color: #333;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.tag-link:hover {
+  background-color: #555;
+}
+
+/* Obrazek (placeholder) */
+.image-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-style: italic;
+  color: #aaa;
+  height: 100%;
+  min-height: 300px;
+}
+
+/* Lista składników */
+.ingredients-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ingredients-list li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.ingredients-list input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+/* Styl przycisków */
+button {
+  background-color: #333;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  margin: 10px 5px 0 0;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #555;
+}
+
+/* Linki w przyciskach */
+a button {
+  all: unset;
+  cursor: pointer;
+  display: inline-block;
+  padding: 12px 20px;
+  background-color: #333;
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+a button:hover {
+  background-color: #555;
+}
+
+/* Opinie użytkowników */
+.opinions-section {
+  grid-column: 1 / -1;
+  margin-top: 40px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.opinions-section h2 {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Pojedyncza opinia */
+.opinion-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  transition: box-shadow 0.3s;
+}
+
+.opinion-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.opinion-card p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #444;
+}
+
+.opinion-card .star, .opinion-card .star-empty {
+  font-size: 16px;
+  vertical-align: middle;
+}
+
+.button-group {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin: 20px 40px 0 0;
+}

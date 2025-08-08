@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodaj Składnik</title>
+  <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+<!-- Górne menu -->
+<nav class="topbar">
+  <div class="menu">
+    <a href="http://localhost:8080/recipes/search?categoryName=preferences">SZYBKIE WYSZUKIWANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=meal">DANIE</a>
+    <a href="http://localhost:8080/recipes/search?categoryName=kitchen">REGION</a>
+    <a href="http://localhost:8080/recipes">SZUKAJ PO SKŁADNIKACH</a>
+  </div>
+  <div class="icon-container">
+    <img src="https://img.icons8.com/ios-filled/50/ffffff/kitchen.png" alt="Kitchen Icon"/>
+  </div>
+</nav>
+
+<h1 th:if="${isEdit}">Edytuj Składnik</h1>
+<h1 th:unless="${isEdit}">Dodaj Nowy Składnik</h1>
+
+<form th:action="@{/ingredients/add}" th:object="${ingredient}" method="post">
+  <input type="hidden" th:field="*{id}" />
+
+  <label for="ingredientName">Nazwa składnika:</label>
+  <input type="text" id="ingredientName" th:field="*{ingredientName}" required>
+
+  <label for="kcalIn100g">Kalorie w 100g:</label>
+  <input type="number" id="kcalIn100g" th:field="*{kcalIn100g}" step="0.1" required>
+
+  <label for="category">Kategoria składnika:</label>
+  <select id="category" th:field="*{category}">
+    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.categoryName}"></option>
+  </select>
+
+  <label for="unit">Jednostka miary:</label>
+  <select id="unit" th:field="*{unit}">
+    <option th:each="unit : ${T(com.example.recipes.enums.Unit).values()}" th:value="${unit}" th:text="${unit}"></option>
+  </select>
+
+  <button type="submit">Wyślij</button>
+  <button onclick="window.location.href='/ingredients'">
+    Anuluj
+  </button>
+</form>
+
+</body>
+</html>
